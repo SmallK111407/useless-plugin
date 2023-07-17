@@ -1,0 +1,24 @@
+{
+  "name": "useless-plugin",
+  "version": "1.0.0",
+  "description": "Yunzai-Bot无用插件",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/SmallK071114/useless-plugin.git"
+  },
+  "keywords": [
+    "Yunzai-Bot",
+    "Miao-Yunzai",
+    "TRSS-Yunzai",
+    "useless-plugin"
+  ],
+  "author": "SunRyK",
+  "license": "MIT",
+  "dependencies": {
+  }
+}
