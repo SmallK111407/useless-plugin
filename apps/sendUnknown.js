@@ -19,7 +19,7 @@ export class sendUnknown extends plugin {
         })
     }
 
-    async randomHappy(e) {
+    async sendUnknown(e) {
         const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
         let number = Math.floor(Math.random() * files.length)
         await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
