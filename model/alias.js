@@ -30,7 +30,7 @@ export default new class {
 const defAlias = {
   cvs: ['c佬', 'C佬', '希尔薇', '希尔薇'],
   DivinationHW: ['d佬', 'D佬', '占卜任', 'dw','DW', 'divin', 'divination'],
-  JD: ['JD佬', 'JB', 'jd', 'jd佬'],
+  JD: ['JD佬', 'JB', 'jb', 'jd', 'jd佬', '坤D'],
   Pluto: ['p佬', 'P佬', '秋刀鱼'],
   地球生物: ['球佬','地球', '色批球', 'dqsw', '色球'],
   鹤望兰: ['兰姐', '兰佬', '鹤佬', '鹤姐'],

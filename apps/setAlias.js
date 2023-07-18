@@ -30,14 +30,6 @@ export class abbrSet extends plugin {
     this.file = './plugins/useless-plugin/config/alias.yaml'
   }
 
-  async init() {
-    if (!fs.existsSync(this.file)) {
-      fs.writeFileSync(this.file, `JD:
-  - 坤D
-  - jb`)
-    }
-  }
-
   async addAlias() {
     if (!await this.checkAuth()) return
     let keyName = this.e.msg.replace(new RegExp(`#|无用|设置|配置|添加|别名|昵称(.*)`, 'g'), '').trim()
