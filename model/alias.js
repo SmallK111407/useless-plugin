@@ -1,3 +1,4 @@
+//代码借鉴StarRail-Plugin
 import setting from './setting.js'
 import _ from 'lodash'
 
@@ -8,7 +9,7 @@ export default new class {
    * @return {string|false} 未匹配到别名则返回false
    */
   get (name) {
-    const aliasList = { ...setting.getConfig('alias') }
+    const aliasList = { ...defAlias, ...setting.getConfig('alias') }
     // 读取角色文件
     if (name in aliasList) return name
     const roleName = _.findKey(aliasList, alias => alias.includes(name))
@@ -22,6 +23,37 @@ export default new class {
   
   getAllName () {
     // 读取角色文件
-    return { ...setting.getConfig('alias') }
+    return { ...defAlias, ...setting.getConfig('alias') }
   }
+}()
+ // 原配置别名
+const defAlias = {
+  cvs: ['c佬', 'C佬', '希尔薇', '希尔薇'],
+  DivinationHW: ['d佬', 'D佬', '占卜任', 'dw','DW', 'divin', 'divination'],
+  JD: ['JD佬', 'JB', 'jd', 'jd佬'],
+  Pluto: ['p佬', 'P佬', '秋刀鱼'],
+  地球生物: ['球佬','地球', '色批球', 'dqsw', '色球'],
+  鹤望兰: ['兰姐', '兰佬', '鹤佬', '鹤姐'],
+  狐狸: ['湖里'],
+  花海: ['华海'],
+  西北一枝花: ['花佬', 'Nwflower', 'nwflower', '牛萎花', '一枝花'],
+  黄球生物: ['黄物'],
+  煌: ['煌佬', '皇佬', '火皇'],
+  刻晴: ['刻晴佬'],
+  零梦夜: ['灵梦夜'],
+  芒果猫: ['芒果', '芒果佬', '芒果猫佬'],
+  喵喵: ['喵佬', '猫猫', '猫佬', '喵'],
+  娜娜: ['娜佬', '叨叨', 'nana', '兰迪娜'],
+  时雨星空: ['时雨', '星空', '时雨佬', 'TRSS', 'trss', 'TimeRainStarSky', 'timerainstarsky'],
+  苏苏: ['苏佬', '小绒布球', '酥酥', '簌簌', '苏沫柒', 'CiKeyQi'],
+  溪姐: ['溪欣梓', '溪溪相欣', '溪佬'],
+  向日葵: ['委屈的向日葵', 'xrk', '向日葵佬', '葵佬'],
+  小游戏: ['土块小游戏', '土块游戏'],
+  曉K: ['曉k', '晓K', '晓k', '小K','小k', 'K', 'k','K佬', 'k佬', '狗k', '狗K','萝莉k', '萝莉K', 'kk小萝莉', 'KK小萝莉', 'llk', 'lolik', 'SunRyK', 'sunryk', ' SmallK111407', 'smallk111407', 'SmallK', 'smallk'],
+  椰羊: ['椰奶', '椰佬', '狗椰羊'],
+  一生无悔: ['医生误会'],
+  伊伊: ['一一', '意义', '依依', '异议', '以一', '一亿', '衣衣', '奕奕', '熠熠', '姨姨', '一役', '意译', '疑义'],
+  渔火: ['渔佬', 'yh', '鱼火', '雨火', 'Arcadia', 'yhArcadia', 'arcadia', '索引库作者'],
+  云雾: ['云舞', '狗云雾'],
+  长楠: ['楠佬', '义子', '长佬', '长楠佬', '昌南']
 }
