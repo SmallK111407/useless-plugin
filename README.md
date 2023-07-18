@@ -29,14 +29,21 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 ### 2.随机发送图片(需要下载`无用图库`)
 
-发送`#随机xx`即可触发，具体可以触发的可以见[goodjob-img](https://gitee.com/SmallK111407/goodjob-img/tree/main/resources) <br>
-该功能**支持别名**，具体可以见[alias.yaml](./config/alias.yaml)
+发送`#随机xx`即可触发，具体可以触发的可以见[goodjob-img](https://gitee.com/SmallK111407/goodjob-img/tree/main/resources)
 
 ### 3.随机发送乐子图片(需要下载`无用图库`)
 
 发送`#随机乐子`即可触发
 
-### 4.更新`无用插件`
+### 4.人物别名类
+
+发送`#无用设置<人物>别名`即可通过提示设置对应人物别名 <br>
+
+发送`#无用删除别名<别名>`即可删除对应人物别名 <br>
+
+发送`#无用<人物>别名`即可查看对应人物所有别名
+
+### 5.更新`无用插件`
 
 发送`#无用更新`即可自动更新`无用插件`
 
