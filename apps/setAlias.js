@@ -174,7 +174,7 @@ export class abbrSet extends plugin {
     let msg = []
     for (let i in result.aliases) {
       let num = Number(i) + 1
-      msg.push(`${num}.${result.aliases[i]}\n`)
+      msg.push(`${num}.${result.aliases[i]}`)
     }
 
     let title = `${result.name}别名，${msg.length}个`
