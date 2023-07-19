@@ -1,4 +1,5 @@
 import plugin from '../../../lib/plugins/plugin.js'
+import common from "../../../lib/common/common.js"
 import fs from 'node:fs'
 import alias from '../model/alias.js'
 import setting from '../model/setting.js'
@@ -173,51 +174,11 @@ export class abbrSet extends plugin {
     let msg = []
     for (let i in result.aliases) {
       let num = Number(i) + 1
-      msg.push(`${num}.${result.aliases[i]}\n`)
+      msg.push(`${num}.${result.aliases[i]}`)
     }
 
     let title = `${result.name}别名，${msg.length}个`
 
-    msg = await this.makeForwardMsg(Bot.uin, title, msg)
-
-    await this.e.reply(msg)
-  }
-
-  async makeForwardMsg(qq, title, msg) {
-    let nickname = Bot.nickname
-    if (this.e.isGroup) {
-      let info = await Bot.getGroupMemberInfo(this.e.group_id, qq)
-      nickname = info.card ?? info.nickname
-    }
-    let userInfo = {
-      user_id: Bot.uin,
-      nickname
-    }
-
-    let forwardMsg = [
-      {
-        ...userInfo,
-        message: title
-      },
-      {
-        ...userInfo,
-        message: msg
-      }
-    ]
-
-    /** 制作转发内容 */
-    if (this.e.isGroup) {
-      forwardMsg = await this.e.group.makeForwardMsg(forwardMsg)
-    } else {
-      forwardMsg = await this.e.friend.makeForwardMsg(forwardMsg)
-    }
-
-    /** 处理描述 */
-    forwardMsg.data = forwardMsg.data
-      .replace(/\n/g, '')
-      .replace(/<title color="#777777" size="26">(.+?)<\/title>/g, '___')
-      .replace(/___+/, `<title color="#777777" size="26">${title}</title>`)
-
-    return forwardMsg
+    await this.e.reply(await common.makeForwardMsg(this.e, msg, title))
   }
 }
