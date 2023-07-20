@@ -28,7 +28,7 @@ export class queryNumber extends plugin {
         if (!role) return false
         const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
         let number = Math.floor(files.length)
-        await this.reply(`当前所查询人物【${role}】\n总共拥有${number}张图片`)
+        await this.reply(`当前所查询人物【${role}】\n目前总共已收录${number}张图片`)
         return true
     }
 }
