@@ -39,7 +39,7 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 戳一戳机器人即可触发，不会拦截其他插件的戳一戳
 
-发送`#无用设置戳一戳(开启/关闭)`即可控制戳一戳出图
+发送`#无用设置戳一戳(开启/关闭)`即可控制戳一戳出图([**来源**](https://gitee.com/SmallK111407/useless-plugin/pulls/7))
 
 ### 5.人物别名类
 
@@ -55,7 +55,7 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 ### 7.查看更新日志
 
-发送`#无用更新日志`即可查看更新日志
+发送`#无用更新日志`即可查看更新日志([**来源**](https://gitee.com/SmallK111407/useless-plugin/pulls/1))
 
 ## 免责声明
 
