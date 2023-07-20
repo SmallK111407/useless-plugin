@@ -39,6 +39,8 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 戳一戳机器人即可触发，不会拦截其他插件的戳一戳
 
+发送`#无用设置戳一戳(开启/关闭)`即可控制戳一戳出图
+
 ### 5.人物别名类
 
 发送`#无用设置<人物>别名`即可通过提示设置对应人物别名 <br>

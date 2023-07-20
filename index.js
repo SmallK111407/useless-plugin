@@ -1,10 +1,25 @@
 import fs from 'node:fs'
 import chalk from 'chalk'
 
+await initConfig()
+
 if (!global.segment) {
   global.segment = (await import("oicq")).segment
 }
 
+async function initConfig() {
+  //检测有没有配置文件
+  const configPath = process.cwd().replace(/\\/g, "/") + '/plugins/useless-plugin/'
+  let path = configPath + 'config/'
+  let pathDef = configPath + 'def/'
+  const files = fs.readdirSync(pathDef).filter(file => file.endsWith('.yaml') + file.endsWith('.js'))
+  for (let file of files) {
+    if (!fs.existsSync(`${path}${file}`)) {
+      fs.copyFileSync(`${pathDef}${file}`, `${path}${file}`)
+      logger.error(`检测到路径为${path + file}的配置文件不存在, 已重新生成`)
+    }
+  }
+}
 let ret = []
 
 logger.info(chalk.rgb(255, 182, 193)('---------awa---------'))
