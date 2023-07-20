@@ -26,12 +26,13 @@ export default new class {
     return { ...defAlias, ...setting.getConfig('alias') }
   }
 }()
- // 原配置别名
+ // 原配置别名,添加新人物请按照文件夹顺序！
 const defAlias = {
   cvs: ['c佬', 'C佬', '希尔薇', '希尔薇'],
   DivinationHW: ['d佬', 'D佬', '占卜任', 'dw','DW', 'divin', 'divination'],
   fafa: ['fa佬', 'fafa姐姐', 'Majestic Fafa', 'majestic fafa'],
   JD: ['JD佬', 'JB', 'jb', 'jd', 'jd佬', '坤D'],
+  kesally: ['Kesally','枫叶', '凯萨利', '枫叶插件作者', '枫叶作者'],
   lynn: ['ly'],
   Pluto: ['p佬', 'P佬', '秋刀鱼'],
   win11: ['Windows11', 'windows11', 'Win11', '古都雨冬寒夜','古都', '雨冬', '寒夜'],
