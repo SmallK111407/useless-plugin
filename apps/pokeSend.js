@@ -19,14 +19,17 @@ export class poke extends plugin {
     })
   }
   async poke(e) {
-    const ikun1 = await YAML.parse(fs.readFileSync(`./plugins/useless-plugin/config/ikun.yaml`, 'utf8'));
+    const ikun1 = await YAML.parse(fs.readFileSync(`${_path}/config/ikun.yaml`, 'utf8'));
     if (ikun1.ikun === "unikun") {
       return false
     }
     if (e.target_id == e.self_id) {
-      const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
-      let number = Math.floor(Math.random() * files.length)
-      await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
+      let path = `${_path}/goodjob-img/resources/`
+      const dirs = fs.readdirSync(path)
+      path = `${path}${dirs[Math.floor(Math.random()*dirs.length)]}/`
+      const files = fs.readdirSync(path)
+      path = `${path}${files[Math.floor(Math.random()*files.length)]}`
+      await this.reply(segment.image(path))
       return false
     } else {
       return false
