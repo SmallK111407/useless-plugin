@@ -1,5 +1,5 @@
 import plugin from '../../../lib/plugins/plugin.js'
-import setting from '../model/setting.js'
+import fs from 'node:fs'
 import YAML from 'yaml'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
