@@ -22,10 +22,10 @@ async function initConfig() {
 }
 let ret = []
 
-logger.info(chalk.rgb(255, 182, 193)('---------awa---------'))
-logger.info(chalk.rgb(255, 182, 193)(`无用插件载入成功~qwq`))
-logger.info(chalk.rgb(255, 182, 193)(`Created By 曉K`))
-logger.info(chalk.rgb(255, 182, 193)(`---------------------`));
+logger.info(chalk.rgb(0, 0, 204)(`---------awa---------`))
+logger.info(chalk.rgb(0, 0, 204)(`无用插件载入成功~qwq`))
+logger.info(chalk.rgb(0, 0, 204)(`Created By 曉K`))
+logger.info(chalk.rgb(0, 0, 204)(`---------------------`));
 
 const files = fs
   .readdirSync('./plugins/useless-plugin/apps')
