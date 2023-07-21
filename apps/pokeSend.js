@@ -1,5 +1,4 @@
 import plugin from '../../../lib/plugins/plugin.js'
-import cfg from '../../../lib/config/config.js'
 import setting from '../model/setting.js'
 import YAML from 'yaml'
 
@@ -24,7 +23,7 @@ export class poke extends plugin {
     if (ikun1.ikun === "unikun") {
       return false
     }
-    if (e.target_id == cfg.qq) {
+    if (e.target_id == e.self_id) {
       const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
       let number = Math.floor(Math.random() * files.length)
       await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
