@@ -25,6 +25,7 @@ let ret = []
 logger.info(chalk.rgb(0, 0, 204)(`---------awa---------`))
 logger.info(chalk.rgb(0, 0, 204)(`无用插件载入成功~qwq`))
 logger.info(chalk.rgb(0, 0, 204)(`Created By 曉K`))
+logger.info(chalk.rgb(0, 0, 204)(`聊天群861663639`))
 logger.info(chalk.rgb(0, 0, 204)(`---------------------`));
 
 const files = fs

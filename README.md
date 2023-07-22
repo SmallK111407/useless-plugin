@@ -4,6 +4,8 @@
 
 通过云崽随机发送云崽圈子一些人不寻常、逆天、乐子、搞笑、有趣等等的发言。
 
+聊天群[861663639](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=nZyWO_U-K8ui-K2KnkMdDkYKEzS02Vua&authKey=W7pl9kMvRDPXak3noKsjTJLY7QnuJIARjFL2QeZAbuw9rqWInjj2HIJyL1Mlq4MX&noverify=0&group_code=861663639)
+
 ## 安装方式
 
 ### 使用Git安装
