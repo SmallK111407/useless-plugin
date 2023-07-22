@@ -2,6 +2,7 @@ import plugin from '../../../lib/plugins/plugin.js'
 import { createRequire } from 'module'
 import _ from 'lodash'
 import { Restart } from '../../other/restart.js'
+import common from "../../../lib/common/common.js"
 
 const require = createRequire(import.meta.url)
 const { exec, execSync } = require('child_process')
@@ -109,7 +110,7 @@ export class Update extends plugin {
      * @returns
      */
     async getLog(plugin = '') {
-        let cm = `cd ./plugins/${plugin}/ && git log  -20 --oneline --pretty=format:"%h||[%cd]  %s" --date=format:"%m-%d %H:%M"`
+        let cm = `cd ./plugins/${plugin}/ && git log  -20 --oneline --pretty=format:"%h||[%cd]  %s" --date=format:"%F %T"`
 
         let logAll
         try {
@@ -135,11 +136,10 @@ export class Update extends plugin {
 
         if (log.length <= 0) return ''
 
-        let end = ''
-        end =
-            '更多详细信息，请前往gitee查看\nhttps://gitee.com/SmallK111407/useless-plugin/commits/main'
+ 
+        let end = '更多详细信息，请前往gitee查看\nhttps://gitee.com/SmallK111407/useless-plugin/commits/main'
 
-        log = await this.makeForwardMsg(`无用插件更新日志，共${line}条`, log, end)
+        log = await common.makeForwardMsg(this.e, [log, end], `${plugin}更新日志，共${line}条`)
 
         return log
     }
@@ -175,58 +175,6 @@ export class Update extends plugin {
             time = '获取时间失败'
         }
         return time
-    }
-
-    /**
-     * 制作转发消息
-     * @param {string} title 标题 - 首条消息
-     * @param {string} msg 日志信息
-     * @param {string} end 最后一条信息
-     * @returns
-     */
-    async makeForwardMsg(title, msg, end) {
-        let nickname = (this.e.bot ?? Bot).nickname
-        if (this.e.isGroup) {
-            let info = await (this.e.bot ?? Bot).getGroupMemberInfo(this.e.group_id, (this.e.bot ?? Bot).uin)
-            nickname = info.card || info.nickname
-        }
-        let userInfo = {
-            user_id: (this.e.bot ?? Bot).uin,
-            nickname
-        }
-
-        let forwardMsg = [
-            {
-                ...userInfo,
-                message: title
-            },
-            {
-                ...userInfo,
-                message: msg
-            }
-        ]
-
-        if (end) {
-            forwardMsg.push({
-                ...userInfo,
-                message: end
-            })
-        }
-
-        /** 制作转发内容 */
-        if (this.e.isGroup) {
-            forwardMsg = await this.e.group.makeForwardMsg(forwardMsg)
-        } else {
-            forwardMsg = await this.e.friend.makeForwardMsg(forwardMsg)
-        }
-
-        /** 处理描述 */
-        forwardMsg.data = forwardMsg.data
-            .replace(/\n/g, '')
-            .replace(/<title color="#777777" size="26">(.+?)<\/title>/g, '___')
-            .replace(/___+/, `<title color="#777777" size="26">${title}</title>`)
-
-        return forwardMsg
     }
 
     /**
