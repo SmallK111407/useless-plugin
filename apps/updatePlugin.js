@@ -18,7 +18,7 @@ export class Update extends plugin {
             name: '[无用插件]更新插件',
             dsc: '更新无用插件',
             event: 'message',
-            priority: 1000,
+            priority: 10,
             rule: [
                 {
                     reg: '^#*无用(插件)?(强制)?更新$',
@@ -33,8 +33,7 @@ export class Update extends plugin {
      * @returns
      */
     async update() {
-        if (!this.e.isMaster || this.e.user_id == 1509293009) return false
-
+        if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
         /** 检查是否正在更新中 */
         if (uping) {
             await this.reply('已有命令更新中..请勿重复操作')
