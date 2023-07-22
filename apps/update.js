@@ -7,7 +7,7 @@ import { pull, pullForce, pullHard, pullClean } from '../model/update.js'
 import { library, link, list } from '../model/moreLib.js'
 
 export class update extends plugin {
-  constructor () {
+  constructor() {
     super({
       name: '[无用插件]图包管理',
       dsc: '更新无用图包',
@@ -29,13 +29,13 @@ export class update extends plugin {
     }
   }
 
-  get pluginPath () { return `${pluginRoot}/` }
+  get pluginPath() { return `${pluginRoot}/` }
 
-  getPluginResourcePath (libName) {
+  getPluginResourcePath(libName) {
     return `${this.pluginPath}${library[libName]}/`
   }
 
-  async updateTask () {
+  async updateTask() {
     for (let listElement of list) {
       let pluginResourcePath = this.getPluginResourcePath(listElement)
       setTimeout(async function () {
@@ -49,8 +49,8 @@ export class update extends plugin {
     }
   }
 
-  async update (e) {
-    if (!(this.e.isMaster||this.e.user_id == 1509293009)) { return false }
+  async update(e) {
+    if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return false }
     let libName = '无用图库'
 
     // 获取要更新的仓库
@@ -77,7 +77,7 @@ export class update extends plugin {
     return true
   }
 
-  async getUpdateType () {
+  async getUpdateType() {
     let command = pull
     if (this.e.msg.includes('强行强制')) {
       this.reply('开始强行执行强制更新操作，请稍等')
@@ -94,8 +94,8 @@ export class update extends plugin {
     return command
   }
 
-  async updatePlugin (e) {
-    if (!(this.e.isMaster||this.e.user_id == 1509293009)) { return true }
+  async updatePlugin(e) {
+    if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
     let command = await this.getUpdateType()
     let path = this.pluginPath
     let timer

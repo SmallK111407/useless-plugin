@@ -26,9 +26,9 @@ export class poke extends plugin {
     if (e.target_id == e.self_id) {
       let path = `${_path}/goodjob-img/resources/`
       const dirs = fs.readdirSync(path)
-      path = `${path}${dirs[Math.floor(Math.random()*dirs.length)]}/`
+      path = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}/`
       const files = fs.readdirSync(path)
-      path = `${path}${files[Math.floor(Math.random()*files.length)]}`
+      path = `${path}${files[Math.floor(Math.random() * files.length)]}`
       await this.reply(segment.image(path))
       return false
     } else {

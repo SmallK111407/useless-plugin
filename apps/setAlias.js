@@ -35,15 +35,15 @@ export class abbrSet extends plugin {
     if (!await this.checkAuth()) return
     let keyName = this.e.msg.replace(new RegExp(`#|无用|设置|配置|添加|别名|昵称(.*)`, 'g'), '').trim()
 
-    logger.info('keyName=',keyName)
+    logger.info('keyName=', keyName)
     //检查别名|昵称是否有对应角色
     const name = alias.get(keyName)
-    if(!name) {
+    if (!name) {
       await this.e.reply('未识别到角色')
       return true
     }
     this.e.roleName = name
-    this.setContext('setAliasContext',false,20)
+    this.setContext('setAliasContext', false, 20)
 
 
     await this.reply(`请发送${name}别名，多个用空格隔开`)
@@ -56,7 +56,7 @@ export class abbrSet extends plugin {
     }
 
     let abbrSetAuth = setting.getConfig('config').abbrSetAuth
-    logger.info('权限：',abbrSetAuth)
+    logger.info('权限：', abbrSetAuth)
     /** 所有人都允许 */
     if (abbrSetAuth === 0) return true
     /** 主人默认允许 */
@@ -99,10 +99,10 @@ export class abbrSet extends plugin {
     // logger.info(roles)
     let ret = []
     for (let name of setName) {
-      logger.info('别名',name)
+      logger.info('别名', name)
       if (!name || !roles[role]) continue
       /** 重复添加 */
-      if (roles[role].includes(name) ) {
+      if (roles[role].includes(name)) {
         continue
       }
       roles[role].push(name)
@@ -136,8 +136,8 @@ export class abbrSet extends plugin {
     // logger.info('roles',roles)
     //是否为默认名 如果是不允许删除
     if (inputName in roles) {
-        await this.reply('默认别名设置，不能删除！')
-        return true
+      await this.reply('默认别名设置，不能删除！')
+      return true
     }
 
     //过滤掉要删除的别名
@@ -159,16 +159,16 @@ export class abbrSet extends plugin {
     let keyName = this.e.msg.replace(new RegExp(`#|无用|别名|昵称`, 'g'), '').trim()
     let result = {};
     Object.entries(role).some(([name, aliases]) => {
-      if (aliases.includes(keyName) || name==keyName) {
-        result = { name: name, aliases:aliases };
+      if (aliases.includes(keyName) || name == keyName) {
+        result = { name: name, aliases: aliases };
         return true; // 找到目标对象后立即退出循环
       }
     });
 
     if (typeof result.name === 'undefined') {
-       await this.e.reply('未识别到人物')
-       //未识别 直接中断
-       return
+      await this.e.reply('未识别到人物')
+      //未识别 直接中断
+      return
     }
 
     let msg = []
