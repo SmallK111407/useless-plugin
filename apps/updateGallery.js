@@ -1,4 +1,3 @@
-// cv from @Nwflower (doge)
 import plugin from '../../../lib/plugins/plugin.js'
 import fs from 'node:fs'
 import { exec } from 'child_process'
@@ -6,7 +5,7 @@ import { pluginRoot } from '../model/path.js'
 import { pull, pullForce, pullHard, pullClean } from '../model/update.js'
 import { library, link, list } from '../model/moreLib.js'
 
-export class update extends plugin {
+export class updateGallery extends plugin {
   constructor() {
     super({
       name: '[无用插件]图包管理',
@@ -16,9 +15,6 @@ export class update extends plugin {
       rule: [{
         reg: '^#*(github)?无用(图包|图库|图片)(强行)?(强制)?(升级|更新)$',
         fnc: 'update'
-      }, {
-        reg: '^#*无用(插件)?(强行)?(强制)?(更新|升级)$',
-        fnc: 'updatePlugin'
       }]
     })
     this._path = process.cwd().replace(/\\/g, '/')
@@ -92,45 +88,5 @@ export class update extends plugin {
       this.reply('开始执行更新操作，请稍等')
     }
     return command
-  }
-
-  async updatePlugin(e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
-    let command = await this.getUpdateType()
-    let path = this.pluginPath
-    let timer
-    exec(command, { cwd: path }, function (error, stdout, stderr) {
-      if (/Already up to date/.test(stdout) || stdout.includes('最新')) {
-        e.reply('目前已经是最新版的无用插件了~')
-        return true
-      }
-      if (error) {
-        e.reply('无用插件更新失败！\nError code: ' + error.code + '\n' + error.stack + '\n 请稍后重试。')
-        return true
-      } else {
-        e.reply('无用插件更新成功，正在尝试重新启动云崽BOT以应用更新...')
-        timer && clearTimeout(timer)
-        redis.set('useless:restart-msg', JSON.stringify({
-          msg: '重启成功，新版无用插件已经生效',
-          qq: e.user_id
-        }), { EX: 30 })
-        timer = setTimeout(function () {
-          let command = 'pnpm run start'
-          if (process.argv[1].includes('pm2')) { command = 'pnpm run restart' }
-          exec(command, function (error, stdout, stderr) {
-            if (error) {
-              e.reply('自动重启失败，请手动重启以应用新版无用插件。\nError code: ' + error.code + '\n' + error.stack + '\n')
-              logger.error(`重启失败\n${error.stack}`)
-              return true
-            } else if (stdout) {
-              logger.mark('重启成功，运行已转为后台，查看日志请用命令：pnpm run log')
-              logger.mark('停止后台运行命令：pnpm stop')
-              process.exit()
-            }
-          })
-        }, 1000)
-      }
-    })
-    return true
   }
 }
