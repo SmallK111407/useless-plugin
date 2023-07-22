@@ -74,7 +74,7 @@ export class Update extends plugin {
             this.e.reply('正在执行更新操作，请稍等')
         }
         /** 获取上次提交的commitId，用于获取日志时判断新增的更新日志 */
-        this.oldCommitId = await this.getcommitId('uselessnai-plugin')
+        this.oldCommitId = await this.getcommitId('useless-plugin')
         uping = true
         let ret = await this.execSync(command)
         uping = false
@@ -137,7 +137,7 @@ export class Update extends plugin {
 
         let end = ''
         end =
-            '更多详细信息，请前往gitee查看\nhttps://gitee.com/SmallK111407/useless-plugin/blob/master/CHANGELOG.md'
+            '更多详细信息，请前往gitee查看\nhttps://gitee.com/SmallK111407/useless-plugin/commits/main'
 
         log = await this.makeForwardMsg(`无用插件更新日志，共${line}条`, log, end)
 
