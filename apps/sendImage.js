@@ -28,7 +28,7 @@ export class sendImage extends plugin {
         if (!role) return false
         const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
         let number = Math.floor(Math.random() * files.length)
-        await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`), true)
+        await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`))
         return true
     }
 }

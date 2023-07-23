@@ -42,6 +42,6 @@ export class extractImage extends plugin {
         let i = msg.replace(/.png/g, '').trim()
         let number = Number(i) + 1
         await this.reply(`您本次抽取到的人物为【${character}】\n本图片位于其文件夹第${number}张`, true)
-        await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${i}.png`), true)
+        await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${i}.png`))
     }
 }

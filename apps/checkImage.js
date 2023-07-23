@@ -30,7 +30,7 @@ export class checkImage extends plugin {
         if (!role) return false
         let result = fs.existsSync(`${_path}/goodjob-img/resources/${role}/${number}.png`)
         if (result === true) {
-            await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${number}.png`), true)
+            await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${number}.png`))
         } else {
             await this.reply(`当前所查看图片不存在！\n你可以使用【#查询${role}数量】来查看对应人物的图片数量`, true)
             return true
