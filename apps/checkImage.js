@@ -20,7 +20,7 @@ export class checkImage extends plugin {
         })
     }
 
-    async checkImage(e) {
+    async checkImage() {
         let msg = this.e.msg
         let value = msg.replace(/[^0-9]/ig, "");
         let number = Number(value) - 1

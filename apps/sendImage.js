@@ -20,7 +20,7 @@ export class sendImage extends plugin {
         })
     }
 
-    async sendImage(e) {
+    async sendImage() {
         let msg = this.e.msg
         let reg = msg.replace(/#|随机|来一张/g, '').trim()
         let name = reg
