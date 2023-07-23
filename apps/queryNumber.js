@@ -25,7 +25,7 @@ export class queryNumber extends plugin {
         if (this.e.msg.includes("乐子")) {
             const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
             let number = Math.floor(files.length)
-            await this.reply(`当前所查询【乐子】\n目前总共已收录${number}张图片`)
+            await this.reply(`当前所查询【乐子】\n目前总共已收录${number}张图片`, true)
         } else {
             let reg = msg.replace(/#|无用|查询|查看|图片|图|数量|张数|数/g, '').trim()
             let name = reg
@@ -33,7 +33,7 @@ export class queryNumber extends plugin {
             if (!role) return false
             const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
             let number = Math.floor(files.length)
-            await this.reply(`当前所查询人物【${role}】\n目前总共已收录${number}张图片`)
+            await this.reply(`当前所查询人物【${role}】\n目前总共已收录${number}张图片`, true)
             return true
         }
     }
