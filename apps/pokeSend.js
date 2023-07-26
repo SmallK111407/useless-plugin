@@ -24,15 +24,37 @@ export class poke extends plugin {
       return false
     }
     if (e.target_id == e.self_id) {
-      let path = `${_path}/goodjob-img/resources/`
-      const dirs = fs.readdirSync(path)
-      path = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}/`
-      const files = fs.readdirSync(path)
-      path = `${path}${files[Math.floor(Math.random() * files.length)]}`
-      await this.reply(segment.image(path))
-      return false
-    } else {
-      return false
+      let result = fs.existsSync(`${_path}/goodjob-img`)
+      if (result === true) {
+        let path = `${_path}/goodjob-img/resources/`
+        const dirs = fs.readdirSync(path)
+        path = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}/`
+        const files = fs.readdirSync(path)
+        path = `${path}${files[Math.floor(Math.random() * files.length)]}`
+        await this.reply(segment.image(path))
+      } else {
+        console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
+        // API from @云溪院
+        let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=all`
+        await fetch(url).catch((err) => logger.error(err))
+          .then(response =>
+            response.json())
+          .then(data => {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const randomData = data[randomIndex];
+            const url = `https://yxy-api.yize.site/api/gaffe/index.php?list=${randomData}&type=json`
+            console.log(randomData);
+            fetch(url).catch((err) => logger.error(err))
+              .then(response =>
+                response.json())
+              .then(data => {
+                const imageUrl = data.image_url;
+                console.log(data.image_url);
+                this.e.reply(segment.image(imageUrl))
+                return true
+              })
+          })
+      }
     }
   }
 }
