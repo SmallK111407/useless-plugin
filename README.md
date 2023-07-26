@@ -31,7 +31,7 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 **注意**:本插件已对接**云溪院API**，即使不下载图库也可以使用！
 
-更建议下载图库，本地返回图片速度会比API返回图片速度**更胜一筹**！
+更建议下载图库，本地返回图片速度会比API返回图片速度**更胜一筹**，也更稳定！
 
 若部分地区访问不上**云溪院API**，请下载图库使用，感谢谅解！
 
@@ -86,5 +86,6 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 ## 其他或致谢
 * 本项目遵循[MIT](./LICENSE)开源协议
+* [云溪院](https://yunxiyuan.xyz/)
 * 感谢所有提交图片的贡献者
 * 您的Star是我们更新的最大动力！
