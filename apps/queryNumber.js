@@ -33,13 +33,14 @@ export class queryNumber extends plugin {
         } else {
             console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
             // API from @云溪院
-            let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=UNKNOWN&type=all`
+            let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=UNKNOWN&type=num`
             await fetch(url).catch((err) => logger.error(err))
                 .then(response =>
                     response.json())
                 .then(data => {
-                    const numberIndex = Math.floor(data.length);
-                    this.e.reply(`当前所查询【乐子】\n目前总共已收录${numberIndex}张图片`, true)
+                    const imageCount = data.image_count;
+                    console.log(data.image_count);
+                    this.e.reply(`当前所查询【乐子】\n目前总共已收录${imageCount}张图片`, true)
                 })
         }
     }
@@ -57,13 +58,14 @@ export class queryNumber extends plugin {
         } else {
             console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
             // API from @云溪院
-            let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=${role}&type=all`
+            let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=${role}&type=num`
             await fetch(url).catch((err) => logger.error(err))
                 .then(response =>
                     response.json())
                 .then(data => {
-                    const numberIndex = Math.floor(data.length);
-                    this.e.reply(`当前所查询人物【${role}】\n目前总共已收录${numberIndex}张图片`, true)
+                    const imageCount = data.image_count;
+                    console.log(data.image_count);
+                    this.e.reply(`当前所查询人物【${role}】\n目前总共已收录${imageCount}张图片`, true)
                 })
         }
         return true
