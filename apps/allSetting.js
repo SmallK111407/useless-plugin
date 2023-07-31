@@ -40,7 +40,7 @@ export class allSetting extends plugin {
         \n【#无用检测配置文件】
         \n【#无用设置别名权限(0|1|2)】
         \n【#无用设置抽取冷却<数字>】
-        \n【无用设置戳一戳(开启|关闭)】
+        \n【#无用设置戳一戳(开启|关闭)】
         \n具体作用请见本插件README.md`
             , true)
         return true
