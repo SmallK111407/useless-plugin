@@ -16,7 +16,7 @@ async function initConfig() {
   for (let file of files) {
     if (!fs.existsSync(`${path}${file}`)) {
       fs.copyFileSync(`${pathDef}${file}`, `${path}${file}`)
-      logger.error(`检测到路径为${path + file}的配置文件不存在, 已重新生成`)
+      logger.error(`[无用插件]检测到路径为${path + file}的配置文件不存在, 已重新生成`)
     }
   }
 }

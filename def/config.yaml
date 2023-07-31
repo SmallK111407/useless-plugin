@@ -3,3 +3,6 @@ abbrSetAuth: 0
 
 # 抽取图片功能冷却时间 单位：分钟
 extractCD: 1
+
+# 戳一戳开关 true-开 false-关
+poke: false

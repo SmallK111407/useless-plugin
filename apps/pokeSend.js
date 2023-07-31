@@ -1,7 +1,7 @@
 import plugin from '../../../lib/plugins/plugin.js';
+import setting from "../model/setting.js";
 import fs from 'node:fs';
 import fetch from 'node-fetch';
-import YAML from 'yaml'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
@@ -19,9 +19,11 @@ export class poke extends plugin {
       ]
     })
   }
+  get appconfig() { return setting.getConfig("config") }
+
   async poke(e) {
-    const ikun1 = await YAML.parse(fs.readFileSync(`${_path}/config/ikun.yaml`, 'utf8'));
-    if (ikun1.ikun === "unikun") {
+    let result = this.appconfig['poke']
+    if (result === false) {
       return false
     }
     if (e.target_id == e.self_id) {
