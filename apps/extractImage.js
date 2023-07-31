@@ -44,7 +44,7 @@ export class extractImage extends plugin {
             let msg = path.substring(path.lastIndexOf('/') + 1);
             let i = msg.replace(/.png/g, '').trim()
             let number = Number(i) + 1
-            await this.reply(`您本次抽取到的人物为【${character}】\n本图片位于其文件夹第${number}张`, true)
+            await this.reply(`您本次抽取到的人物为「${character}」\n本图片位于其文件夹第${number}张`, true)
             await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${i}.png`))
         } else {
             console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
@@ -68,7 +68,7 @@ export class extractImage extends plugin {
                             let msg = randomData.substring(randomData.lastIndexOf('/') + 1);
                             let i = msg.replace(/.png/g, '').trim()
                             let number = Number(i) + 1
-                            this.e.reply(`您本次抽取到的人物为【${character}】\n本图片是TA的第${number}张图哦~`, true)
+                            this.e.reply(`您本次抽取到的人物为「${character}」\n本图片是TA的第${number}张图哦~`, true)
                             this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${character}/${i}.png`))
                             return true
                         })
