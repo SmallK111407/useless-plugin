@@ -43,6 +43,7 @@ export class allSetting extends plugin {
         \n【无用设置戳一戳(开启|关闭)】
         \n具体作用请见本插件README.md`
             , true)
+        return true
     }
     async checkSetting() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
