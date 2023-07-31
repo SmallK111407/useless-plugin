@@ -88,8 +88,6 @@ export class allSetting extends plugin {
                 fs.writeFileSync(`${_path}/config/config.yaml`, abbrSetAuth, "utf8");
                 this.e.reply("[无用插件]别名添加权限已设置仅主人可以添加！", true)
                 return true
-            } else if (e.msg === "") {
-                this.e.reply(`[无用插件]请键入有效数字！\n0 - 所有人都可以添加\n1 - 仅群管理员或主人可以添加\n2 - 仅主人可以添加`, true)
             }
         }
     }
