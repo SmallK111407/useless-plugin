@@ -17,7 +17,6 @@ export class updateLog extends plugin {
       ]
     })
   }
-
   async checkAuth(e) {
     if (!e.isMaster) {
       e.reply(`只有主人才能命令我哦~(*/ω＼*)`)
@@ -25,7 +24,6 @@ export class updateLog extends plugin {
     }
     return true
   }
-
   /**
    * 获取插件更新日志
    * @param {string} plugin 插件名称
@@ -36,7 +34,6 @@ export class updateLog extends plugin {
     if (plugin) {
       cm = `cd ./plugins/${plugin}/ && ${cm}`
     }
-
     let logAll
     try {
       logAll = await execSync(cm, { encoding: 'utf-8', windowsHide: true })
@@ -44,11 +41,8 @@ export class updateLog extends plugin {
       logger.error(error.toString())
       this.reply(error.toString())
     }
-
     if (!logAll) return false
-
     logAll = logAll.split('\n')
-
     let log = []
     for (let str of logAll) {
       str = str.split('||')
@@ -58,19 +52,11 @@ export class updateLog extends plugin {
     }
     let line = log.length
     log = log.join('\n\n')
-
     if (log.length <= 0) return ''
-
-    let end = '更多详细信息，请前往gitee查看\nhttps://gitee.com/SmallK111407/useless-plugin'
-
+    let end = '更多详细信息，请前往gitee查看\nhttps://gitee.com/SmallK111407/useless-plugin/commits/main'
     log = await common.makeForwardMsg(this.e, [log, end], `${plugin}更新日志，共${line}条`)
-
     return log
   }
-
-  /*
-   *更新日志的方法
-   */
   async updateLog() {
     let log = await this.getLog()
     await this.reply(log)

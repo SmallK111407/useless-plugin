@@ -24,13 +24,10 @@ export class updateGallery extends plugin {
       fnc: () => this.updateTask()
     }
   }
-
   get pluginPath() { return `${pluginRoot}/` }
-
   getPluginResourcePath(libName) {
     return `${this.pluginPath}${library[libName]}/`
   }
-
   async updateTask() {
     for (let listElement of list) {
       let pluginResourcePath = this.getPluginResourcePath(listElement)
@@ -44,11 +41,9 @@ export class updateGallery extends plugin {
       }, Math.floor(Math.random() * 3600000 + 1))
     }
   }
-
   async update(e) {
     if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return false }
     let libName = '无用图库'
-
     // 获取要更新的仓库
     for (let listElement of list) {
       if (this.e.msg && this.e.msg.includes(listElement)) {
@@ -56,7 +51,6 @@ export class updateGallery extends plugin {
         break
       }
     }
-
     if (fs.existsSync(this.getPluginResourcePath(libName))) {
       let command = await this.getUpdateType()
       exec(command, { cwd: this.getPluginResourcePath(libName) }, function (error, stdout, stderr) {
@@ -72,7 +66,6 @@ export class updateGallery extends plugin {
     }
     return true
   }
-
   async getUpdateType() {
     let command = pull
     if (this.e.msg.includes('强行强制')) {

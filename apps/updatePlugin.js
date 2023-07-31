@@ -9,7 +9,6 @@ const { exec, execSync } = require('child_process')
 
 // 是否在更新中
 let uping = false
-
 /**
  * 处理插件更新
  */
@@ -28,7 +27,6 @@ export class Update extends plugin {
             ]
         })
     }
-
     /**
      * rule - 更新无用插件
      * @returns
@@ -40,26 +38,20 @@ export class Update extends plugin {
             await this.reply('已有命令更新中..请勿重复操作')
             return
         }
-
         /** 检查git安装 */
         if (!(await this.checkGit())) return
-
         const isForce = this.e.msg.includes('强制')
-
         /** 执行更新 */
         await this.runUpdate(isForce)
-
         /** 是否需要重启 */
         if (this.isUp) {
             // await this.reply("更新完毕，请重启云崽后生效")
             setTimeout(() => this.restart(), 2000)
         }
     }
-
     restart() {
         new Restart(this.e).restart()
     }
-
     /**
      * 无用插件更新函数
      * @param {boolean} isForce 是否为强制更新
@@ -85,7 +77,6 @@ export class Update extends plugin {
             this.gitErr(ret.error, ret.stdout)
             return false
         }
-
         /** 获取插件提交的最新时间 */
         let time = await this.getTime('useless-plugin')
 
@@ -98,12 +89,9 @@ export class Update extends plugin {
             let log = await this.getLog('useless-plugin')
             await this.reply(log)
         }
-
         logger.mark(`${this.e.logFnc} 最后更新时间：${time}`)
-
         return true
     }
-
     /**
      * 获取无用插件的更新日志
      * @param {string} plugin 插件名称
@@ -111,7 +99,6 @@ export class Update extends plugin {
      */
     async getLog(plugin = '') {
         let cm = `cd ./plugins/${plugin}/ && git log  -20 --oneline --pretty=format:"%h||[%cd]  %s" --date=format:"%F %T"`
-
         let logAll
         try {
             logAll = await execSync(cm, { encoding: 'utf-8' })
@@ -119,11 +106,8 @@ export class Update extends plugin {
             logger.error(error.toString())
             this.reply(error.toString())
         }
-
         if (!logAll) return false
-
         logAll = logAll.split('\n')
-
         let log = []
         for (let str of logAll) {
             str = str.split('||')
@@ -133,17 +117,11 @@ export class Update extends plugin {
         }
         let line = log.length
         log = log.join('\n\n')
-
         if (log.length <= 0) return ''
-
- 
         let end = '更多详细信息，请前往gitee查看\nhttps://gitee.com/SmallK111407/useless-plugin/commits/main'
-
         log = await common.makeForwardMsg(this.e, [log, end], `${plugin}更新日志，共${line}条`)
-
         return log
     }
-
     /**
      * 获取上次提交的commitId
      * @param {string} plugin 插件名称
@@ -151,13 +129,10 @@ export class Update extends plugin {
      */
     async getcommitId(plugin = '') {
         let cm = `git -C ./plugins/${plugin}/ rev-parse --short HEAD`
-
         let commitId = await execSync(cm, { encoding: 'utf-8' })
         commitId = _.trim(commitId)
-
         return commitId
     }
-
     /**
      * 获取本次更新插件的最后一次提交时间
      * @param {string} plugin 插件名称
@@ -165,7 +140,6 @@ export class Update extends plugin {
      */
     async getTime(plugin = '') {
         let cm = `cd ./plugins/${plugin}/ && git log -1 --oneline --pretty=format:"%cd" --date=format:"%m-%d %H:%M"`
-
         let time = ''
         try {
             time = await execSync(cm, { encoding: 'utf-8' })
@@ -176,7 +150,6 @@ export class Update extends plugin {
         }
         return time
     }
-
     /**
      * 处理更新失败的相关函数
      * @param {string} err
@@ -187,19 +160,16 @@ export class Update extends plugin {
         let msg = '更新失败！'
         let errMsg = err.toString()
         stdout = stdout.toString()
-
         if (errMsg.includes('Timed out')) {
             let remote = errMsg.match(/'(.+?)'/g)[0].replace(/'/g, '')
             await this.reply(msg + `\n连接超时：${remote}`)
             return
         }
-
         if (/Failed to connect|unable to access/g.test(errMsg)) {
             let remote = errMsg.match(/'(.+?)'/g)[0].replace(/'/g, '')
             await this.reply(msg + `\n连接失败：${remote}`)
             return
         }
-
         if (errMsg.includes('be overwritten by merge')) {
             await this.reply(
                 msg +
@@ -208,7 +178,6 @@ export class Update extends plugin {
             )
             return
         }
-
         if (stdout.includes('CONFLICT')) {
             await this.reply([
                 msg + '存在冲突\n',
@@ -218,10 +187,8 @@ export class Update extends plugin {
             ])
             return
         }
-
         await this.reply([errMsg, stdout])
     }
-
     /**
      * 异步执行git相关命令
      * @param {string} cmd git命令
@@ -234,7 +201,6 @@ export class Update extends plugin {
             })
         })
     }
-
     /**
      * 检查git是否安装
      * @returns
