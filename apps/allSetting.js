@@ -58,7 +58,7 @@ export class allSetting extends plugin {
             return true
         }
     }
-    async abbrSetAuthSetting() {
+    async abbrSetAuthSetting(e) {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
         const configLines = fs.readFileSync(`${_path}/config/config.yaml`, 'utf8').split('\n').length;
         const defLines = fs.readFileSync(`${_path}/def/config.yaml`, 'utf8').split('\n').length;
