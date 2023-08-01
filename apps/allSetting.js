@@ -1,4 +1,5 @@
 import plugin from '../../../lib/plugins/plugin.js';
+import setting from '../model/setting.js';
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
@@ -20,6 +21,10 @@ export class allSetting extends plugin {
                     fnc: 'checkSetting'
                 },
                 {
+                    reg: '^#*无用(获取|查看)?(配置|设置)(情况|状况)?$',
+                    fnc: 'getSetting'
+                },
+                {
                     reg: '^#*无用设置别名(权限|限制)(0|1|2)$',
                     fnc: 'abbrSetAuthSetting'
                 },
@@ -34,6 +39,7 @@ export class allSetting extends plugin {
             ]
         })
     }
+
     async settingHelp() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
         this.e.reply(`=====无用配置菜单=====
@@ -57,6 +63,22 @@ export class allSetting extends plugin {
             this.e.reply(`[无用插件]检测结果:配置文件为最新\n继续愉快地使用无用插件吧！`, true)
             return true
         }
+    }
+    get appconfig() { return setting.getConfig("config") }
+    async getSetting() {
+        if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
+        const abbrSetAuth = this.appconfig['abbrSetAuth']
+        let abbrSetAuthResult = String(abbrSetAuth).replace(/0/g, '所有人都可以设置').replace(/1/g, '仅管理员或主人可以设置').replace(/2/g, '仅主人可以设置').trim()
+        const cdtime = this.appconfig['extractCD']
+        const poke = this.appconfig['poke']
+        let pokeResult = String(poke).replace(/true/g, '开启').replace(/false/g, '关闭').trim()
+        this.e.reply(`=====无用配置情况=====
+        \n别名权限: ${abbrSetAuthResult}
+        \n抽取冷却: ${cdtime}分钟
+        \n戳一戳: ${pokeResult}
+        \n你可以使用【#无用配置菜单】来查看如何配置`
+            , true)
+        return true
     }
     async abbrSetAuthSetting(e) {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
