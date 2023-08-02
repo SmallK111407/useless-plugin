@@ -3,7 +3,6 @@ import alias from '../model/alias.js';
 import fs from 'node:fs';
 import fetch from 'node-fetch'
 
-
 const _path = process.cwd() + '/plugins/useless-plugin'
 
 export class queryNumber extends plugin {
