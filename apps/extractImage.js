@@ -36,16 +36,17 @@ export class extractImage extends plugin {
         let result = fs.existsSync(`${_path}/goodjob-img`)
         if (result === true) {
             let path = `${_path}/goodjob-img/resources/`
+            const file = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
             const dirs = fs.readdirSync(path)
             const path1 = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}`
             let character = path1.substring(path.lastIndexOf('/') + 1)
             const files = fs.readdirSync(`${path1}/`)
             path = `${path}${files[Math.floor(Math.random() * files.length)]}`
             let msg = path.substring(path.lastIndexOf('/') + 1);
-            let i = msg.replace(/.png/g, '').trim()
+            let i = msg.replace(/.png/g, '').replace(/.gif/g, '').trim()
             let number = Number(i) + 1
             await this.reply(`您本次抽取到的人物为「${character}」\n本图片位于其文件夹第${number}张`, true)
-            await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${i}.png`))
+            await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${file[i]}`))
         } else {
             console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             // API from @云溪院
@@ -66,11 +67,16 @@ export class extractImage extends plugin {
                             const randomIndex = Math.floor(Math.random() * data.length);
                             const randomData = data[randomIndex];
                             let msg = randomData.substring(randomData.lastIndexOf('/') + 1);
-                            let i = msg.replace(/.png/g, '').trim()
+                            let i = msg.replace(/.png/g, '').replace(/.gif/g, '').trim()
                             let number = Number(i) + 1
                             this.e.reply(`您本次抽取到的人物为「${character}」\n本图片是TA的第${number}张图哦~`, true)
-                            this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${character}/${i}.png`))
-                            return true
+                            if (`${character}` == `茄子`) {
+                                this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${character}/${i}.gif`))
+                                return true
+                            } else {
+                                this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${character}/${i}.png`))
+                                return true
+                            }
                         })
                 })
         }
