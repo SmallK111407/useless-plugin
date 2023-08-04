@@ -36,7 +36,6 @@ export class extractImage extends plugin {
         let result = fs.existsSync(`${_path}/goodjob-img`)
         if (result === true) {
             let path = `${_path}/goodjob-img/resources/`
-            const file = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
             const dirs = fs.readdirSync(path)
             const path1 = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}`
             let character = path1.substring(path.lastIndexOf('/') + 1)
@@ -45,6 +44,7 @@ export class extractImage extends plugin {
             let msg = path.substring(path.lastIndexOf('/') + 1);
             let i = msg.replace(/.png/g, '').replace(/.gif/g, '').trim()
             let number = Number(i) + 1
+            const file = fs.readdirSync(`${_path}/goodjob-img/resources/${character}/`)
             await this.reply(`您本次抽取到的人物为「${character}」\n本图片位于其文件夹第${number}张`, true)
             await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${file[i]}`))
         } else {
