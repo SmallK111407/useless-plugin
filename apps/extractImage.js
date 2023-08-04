@@ -42,7 +42,7 @@ export class extractImage extends plugin {
             const files = fs.readdirSync(`${path1}/`)
             path = `${path}${files[Math.floor(Math.random() * files.length)]}`
             let msg = path.substring(path.lastIndexOf('/') + 1);
-            let i = msg.replace(/.png/g, '').replace(/.gif/g, '').trim()
+            let i = msg.replace(/.png|gif/g, '').trim()
             let number = Number(i) + 1
             const file = fs.readdirSync(`${_path}/goodjob-img/resources/${character}/`)
             await this.reply(`您本次抽取到的人物为「${character}」\n本图片位于其文件夹第${number}张`, true)
@@ -67,7 +67,7 @@ export class extractImage extends plugin {
                             const randomIndex = Math.floor(Math.random() * data.length);
                             const randomData = data[randomIndex];
                             let msg = randomData.substring(randomData.lastIndexOf('/') + 1);
-                            let i = msg.replace(/.png/g, '').replace(/.gif/g, '').trim()
+                            let i = msg.replace(/.png|gif/g, '').trim()
                             let number = Number(i) + 1
                             this.e.reply(`您本次抽取到的人物为「${character}」\n本图片是TA的第${number}张图哦~`, true)
                             if (`${character}` == `茄子`) {
