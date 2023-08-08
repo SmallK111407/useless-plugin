@@ -35,6 +35,8 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 ## 功能介绍
 
+<details><summary>展开/收起</summary>
+
 ### 1.下载`无用图库`(仅主人)
 
 发送`#无用图库更新`即可自动下载资源，等待机器人回复即可！
@@ -110,6 +112,8 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 ### 13.查看更新日志
 
 发送`#无用更新日志`即可查看更新日志([**来源**](https://gitee.com/SmallK111407/useless-plugin/pulls/1))
+
+</details>
 
 ## 免责声明
 
