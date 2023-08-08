@@ -1,4 +1,14 @@
+<p align="center">
+  <a href="../../../../SmallK111407/"><img src="./resources/logo/useless.png" width="100%" height="100%" alt="useless-plugin"></a>
+</p>
+
+<div align="center">
+
 # Useless-Plugin
+
+_♥这只是一个 “玩笑” ♥_
+
+</div>
 
 ## 项目介绍
 
