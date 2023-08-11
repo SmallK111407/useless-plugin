@@ -3,7 +3,7 @@ import common from "../../../lib/common/common.js"
 import { execSync } from "child_process";
 
 export class updateLog extends plugin {
-  constructor(e) {
+  constructor() {
     super({
       name: '[无用插件]更新日志',
       dsc: '无用插件更新日志',
