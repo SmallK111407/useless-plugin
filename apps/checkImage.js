@@ -27,14 +27,12 @@ export class checkImage extends plugin {
     async checkHappyImage() {
         let msg = this.e.msg
         let value = msg.replace(/[^0-9]/ig, "");
-        let reg = msg.replace(/#|无用|查看|发送|第|[0-9]|张|号|图片|照片|图/g, '').trim()
-        let name = reg
         let number = Number(value) - 1
         let test = fs.existsSync(`${_path}/goodjob-img`)
         if (test === false) {
             console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             // API from @云溪院
-            await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${name}/${number}.gif`)
+            await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`)
                 .then(response => {
                     if (!response.ok) {
                         console.log('[无用插件]云溪院API 404 Error');
@@ -42,7 +40,7 @@ export class checkImage extends plugin {
                         return true
                     } else {
                         console.log('[无用插件]云溪院API访问成功!');
-                        this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${name}/${number}.png`))
+                        this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`))
                         return true
                     }
                 })
@@ -51,10 +49,10 @@ export class checkImage extends plugin {
 
                 })
         } else {
-            const files = fs.readdirSync(`${_path}/goodjob-img/resources/${name}/`)
-            let result = fs.existsSync(`${_path}/goodjob-img/resources/${name}/${files[number]}`)
+            const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
+            let result = fs.existsSync(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`)
             if (result === true) {
-                await this.reply(segment.image(`${_path}/goodjob-img/resources/${name}/${files[number]}`))
+                await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
                 return true
             } else if (result === false) {
                 await this.reply(`当前所查看图片不存在！\n你可以使用【#查询乐子数量】来查看乐子图片数量`, true)
