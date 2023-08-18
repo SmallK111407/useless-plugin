@@ -50,9 +50,9 @@ export class checkImage extends plugin {
                 })
         } else {
             const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
-            let result = fs.existsSync(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`)
+            let result = fs.existsSync(`${_path}/goodjob-img/resources/UNKNOWN/${number}.png`)
             if (result === true) {
-                await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
+                await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${number}.png`))
                 return true
             } else if (result === false) {
                 await this.reply(`当前所查看图片不存在！\n你可以使用【#查询乐子数量】来查看乐子图片数量`, true)
@@ -109,8 +109,13 @@ export class checkImage extends plugin {
             const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
             let result = fs.existsSync(`${_path}/goodjob-img/resources/${role}/${files[number]}`)
             if (result === true) {
-                await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`))
-                return true
+                if (`${role}` == `茄子`) {
+                    await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${number}.gif`))
+                    return true
+                } else {
+                    await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${number}.png`))
+                    return true
+                }
             } else if (result === false) {
                 await this.reply(`当前所查看图片不存在！\n你可以使用【#查询${role}数量】来查看对应人物的图片数量`, true)
                 return true
