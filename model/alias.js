@@ -1,13 +1,17 @@
 import setting from './setting.js'
 import _ from 'lodash'
+import fs from 'node:fs'
 
 async function loadAliasData() {
-  const response = await import('./aliasData/alias.json')
-  defAlias = response.default
+  try {
+    const jsonContent = await fs.readFile('./aliasData/alias.json', 'utf-8');
+    defAlias = JSON.parse(jsonContent);
+  } catch (error) {
+    console.error('加载原配置文件错误:', error);
+  }
 }
-loadAliasData().catch(error => {
-  console.error('别名原配置加载错误:', error)
-})
+
+loadAliasData()
 
 export default new class {
   /**
