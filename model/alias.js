@@ -2,10 +2,12 @@ import setting from './setting.js'
 import _ from 'lodash'
 import fs from 'node:fs/promises'
 
+const _path = process.cwd() + '/plugins/useless-plugin'
+
 let defAlias = null
 async function loadAliasData() {
   try {
-    const jsonContent = await fs.readFile('../aliasData/alias.json', 'utf-8')
+    const jsonContent = await fs.readFile(`${_path}/model/aliasData/alias.json`, `utf-8`)
     defAlias = JSON.parse(jsonContent)
   } catch (error) {
     console.error('加载原配置文件错误:', error)
