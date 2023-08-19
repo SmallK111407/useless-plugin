@@ -1,8 +1,13 @@
-import aliasData from './aliasData/alias.json'
 import setting from './setting.js'
 import _ from 'lodash'
 
-const defAlias = aliasData
+async function loadAliasData() {
+  const response = await import('./aliasData/alias.json')
+  defAlias = response.default
+}
+loadAliasData().catch(error => {
+  console.error('别名原配置加载错误:', error)
+})
 
 export default new class {
   /**
