@@ -30,22 +30,22 @@ export class checkImage extends plugin {
         let number = Number(value) - 1
         let test = fs.existsSync(`${_path}/goodjob-img`)
         if (test === false) {
-            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
+            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             // API from @云溪院
             await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`)
                 .then(response => {
                     if (!response.ok) {
-                        console.log('[无用插件]云溪院API 404 Error');
+                        logger.debug('[无用插件]云溪院API 404 Error');
                         this.e.reply(`当前所查看图片不存在或是API访问出现问题！\n你可以使用【#查询杂图数量】来查看杂图图片数量`, true)
                         return true
                     } else {
-                        console.log('[无用插件]云溪院API访问成功!');
+                        logger.debug('[无用插件]云溪院API访问成功!');
                         this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`))
                         return true
                     }
                 })
                 .catch(error => {
-                    console.log('Error:', error)
+                    logger.error('Error:', error)
 
                 })
         } else {
@@ -70,23 +70,23 @@ export class checkImage extends plugin {
         if (!role) return false
         let test = fs.existsSync(`${_path}/goodjob-img`)
         if (test === false) {
-            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
+            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             // API from @云溪院
             if (`${role}` == `茄子`) {
                 await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.gif`)
                     .then(response => {
                         if (!response.ok) {
-                            console.log('[无用插件]云溪院API 404 Error');
+                            logger.debug('[无用插件]云溪院API 404 Error');
                             this.e.reply(`当前所查看图片不存在或是API访问出现问题！\n你可以使用【#查询${role}数量】来查看对应人物的图片数量`, true)
                             return true
                         } else {
-                            console.log('[无用插件]云溪院API访问成功!');
+                            logger.debug('[无用插件]云溪院API访问成功!');
                             this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.gif`))
                             return true
                         }
                     })
                     .catch(error => {
-                        console.log('Error:', error)
+                        logger.error('Error:', error)
                     })
             } else {
                 await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.png`)
@@ -102,7 +102,7 @@ export class checkImage extends plugin {
                         }
                     })
                     .catch(error => {
-                        console.log('Error:', error)
+                        logger.error('Error:', error)
                     })
             }
         } else {

@@ -37,7 +37,7 @@ export class queryNumber extends plugin {
             await this.reply(`当前所查询「杂图」\n目前总共已收录${number}张图片`, true)
             return true
         } else {
-            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
+            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
             // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=UNKNOWN&type=num`
             await fetch(url).catch((err) => logger.error(err))
@@ -45,7 +45,7 @@ export class queryNumber extends plugin {
                     response.json())
                 .then(data => {
                     const imageCount = data.image_count;
-                    console.log(data.image_count);
+                    logger.debug(data.image_count);
                     this.e.reply(`当前所查询「杂图」\n目前总共已收录${imageCount}张图片`, true)
                 })
             return true
@@ -70,7 +70,7 @@ export class queryNumber extends plugin {
             this.e.reply(`目前本图库总共已收录${count}张图片`, true)
             return true
         } else {
-            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
+            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
             // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=num`
             await fetch(url).catch((err) => logger.error(err))
@@ -78,7 +78,7 @@ export class queryNumber extends plugin {
                     response.json())
                 .then(data => {
                     const count = data.num;
-                    console.log(data.num);
+                    logger.debug(data.num);
                     this.e.reply(`目前本图库总共已收录${count}张图片`, true)
                 })
             return true
@@ -97,7 +97,7 @@ export class queryNumber extends plugin {
             await this.reply(`当前所查询人物「${role}」\n目前总共已收录${number}张图片`, true)
             return true
         } else {
-            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
+            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
             // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=${role}&type=num`
             await fetch(url).catch((err) => logger.error(err))
@@ -105,7 +105,7 @@ export class queryNumber extends plugin {
                     response.json())
                 .then(data => {
                     const imageCount = data.image_count;
-                    console.log(data.image_count);
+                    logger.debug(data.image_count);
                     this.e.reply(`当前所查询人物「${role}」\n目前总共已收录${imageCount}张图片`, true)
                 })
             return true

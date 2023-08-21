@@ -48,7 +48,7 @@ export class extractImage extends plugin {
             await this.reply(`您本次抽取到的人物为「${character}」\n本图片位于其文件夹第${number}张`, true)
             await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${file[i]}`))
         } else {
-            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
+            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=all`
             await fetch(url).catch((err) => logger.error(err))
@@ -59,7 +59,7 @@ export class extractImage extends plugin {
                     const randomData = data[randomIndex];
                     let character = randomData
                     const url = `https://yxy-api.yize.site/api/gaffe/index.php?list=${randomData}&type=all`
-                    console.log(randomData);
+                    logger.debug(randomData);
                     fetch(url).catch((err) => logger.error(err))
                         .then(response =>
                             response.json())
