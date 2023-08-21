@@ -15,13 +15,65 @@ export class sendImage extends plugin {
             priority: 10,
             rule: [
                 {
+                    reg: '^#*(随机|来一张)杂图$',
+                    fnc: 'sendUnknown'
+                },
+                {
+                    reg: '^#*(随机|来一张)乐子(图片|照片)?',
+                    fnc: 'sendRandom'
+                },
+                {
                     reg: '^#*(随机|来一张).*',
                     fnc: 'sendImage'
                 }
             ]
         })
     }
-
+    async sendUnknown() {
+        let result = fs.existsSync(`${_path}/goodjob-img`)
+        if (result === true) {
+            const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
+            let number = Math.floor(Math.random() * files.length)
+            await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
+        } else {
+            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
+            // API from @云溪院
+            let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=UNKNOWN&type=json`
+            await fetch(url).catch((err) => logger.error(err))
+                .then(response =>
+                    response.json())
+                .then(data => {
+                    const imageUrl = data.image_url;
+                    console.log(data.image_url);
+                    this.e.reply(segment.image(imageUrl))
+                })
+            return true
+        }
+    }
+    async sendRandom() {
+        let result = fs.existsSync(`${_path}/goodjob-img`)
+        if (result === true) {
+            let path = `${_path}/goodjob-img/resources/`
+            const dirs = fs.readdirSync(path)
+            path = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}/`
+            const files = fs.readdirSync(path)
+            path = `${path}${files[Math.floor(Math.random() * files.length)]}`
+            await this.reply(segment.image(path))
+        } else {
+            console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
+            // API from @云溪院
+            let url = `https://yxy-api.yize.site/api/gaffe/?list=sj&type=json`
+            await fetch(url).catch((err) => logger.error(err))
+                .then(response =>
+                    response.json())
+                .then(data => {
+                    const imageUrl = data.image_url;
+                    console.log(data.image_url);
+                    this.e.reply(segment.image(imageUrl))
+                    return true
+                })
+        }
+    }
     async sendImage() {
         let msg = this.e.msg
         let reg = msg.replace(/#|随机|来一张/g, '').trim()

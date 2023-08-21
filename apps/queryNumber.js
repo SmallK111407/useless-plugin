@@ -14,8 +14,8 @@ export class queryNumber extends plugin {
             priority: 10,
             rule: [
                 {
-                    reg: '^#*(无用)?(查询|查看|检查)乐子(图片|图)?(数量|张数|数)',
-                    fnc: 'queryHappyNumber'
+                    reg: '^#*(无用)?(查询|查看|检查)杂图(图片|图)?(数量|张数|数)',
+                    fnc: 'queryMessyNumber'
                 },
                 {
                     reg: '^#*(无用)?(查询|查看|检查)(全部|所有)(图片|图)?(数量|张数|数)',
@@ -34,7 +34,7 @@ export class queryNumber extends plugin {
         if (result === true) {
             const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
             let number = Math.floor(files.length)
-            await this.reply(`当前所查询「乐子」\n目前总共已收录${number}张图片`, true)
+            await this.reply(`当前所查询「杂图」\n目前总共已收录${number}张图片`, true)
             return true
         } else {
             console.log('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
@@ -46,7 +46,7 @@ export class queryNumber extends plugin {
                 .then(data => {
                     const imageCount = data.image_count;
                     console.log(data.image_count);
-                    this.e.reply(`当前所查询「乐子」\n目前总共已收录${imageCount}张图片`, true)
+                    this.e.reply(`当前所查询「杂图」\n目前总共已收录${imageCount}张图片`, true)
                 })
             return true
         }

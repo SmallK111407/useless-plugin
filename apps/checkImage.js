@@ -14,8 +14,8 @@ export class checkImage extends plugin {
             priority: 10,
             rule: [
                 {
-                    reg: '^#*(无用)?(查看|发送)乐子(第)?.*(张|号)?(图片|照片|图)?',
-                    fnc: 'checkHappyImage'
+                    reg: '^#*(无用)?(查看|发送)杂图(第)?.*(张|号)?(图片|照片|图)?',
+                    fnc: 'checkMessyImage'
                 },
                 {
                     reg: '^#*(无用)?(查看|发送).*(第)?.*(张|号)?(图片|照片|图)?',
@@ -24,7 +24,7 @@ export class checkImage extends plugin {
             ]
         })
     }
-    async checkHappyImage() {
+    async checkMessyImage() {
         let msg = this.e.msg
         let value = msg.replace(/[^0-9]/ig, "");
         let number = Number(value) - 1
@@ -36,7 +36,7 @@ export class checkImage extends plugin {
                 .then(response => {
                     if (!response.ok) {
                         console.log('[无用插件]云溪院API 404 Error');
-                        this.e.reply(`当前所查看图片不存在或是API访问出现问题！\n你可以使用【#查询乐子数量】来查看乐子图片数量`, true)
+                        this.e.reply(`当前所查看图片不存在或是API访问出现问题！\n你可以使用【#查询杂图数量】来查看杂图图片数量`, true)
                         return true
                     } else {
                         console.log('[无用插件]云溪院API访问成功!');
@@ -55,7 +55,7 @@ export class checkImage extends plugin {
                 await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${number}.png`))
                 return true
             } else if (result === false) {
-                await this.reply(`当前所查看图片不存在！\n你可以使用【#查询乐子数量】来查看乐子图片数量`, true)
+                await this.reply(`当前所查看图片不存在！\n你可以使用【#查询杂图数量】来查看杂图图片数量`, true)
                 return true
             }
         }
