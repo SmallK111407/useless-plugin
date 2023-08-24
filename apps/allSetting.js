@@ -87,7 +87,7 @@ export class allSetting extends plugin {
         if (configLines < defLines) {
             fs.copyFileSync(`${_path}/def/config.yaml`, `${_path}/config/config.yaml`)
             this.e.reply(`[无用插件]检测到config内配置文件非最新，已重新生成最新配置文件\n请重新发送设置命令`, true)
-            console.log(`[无用插件]尚未检测到config内含有【别名权限】的配置，已自动填入，默认为所有人都可以添加别名`)
+            logger.debug(`[无用插件]尚未检测到config内含有【别名权限】的配置，已自动填入，默认为所有人都可以添加别名`)
         } else {
             if (e.msg.includes('0')) {
                 let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
@@ -120,7 +120,7 @@ export class allSetting extends plugin {
         if (configLines < defLines) {
             fs.copyFileSync(`${_path}/def/config.yaml`, `${_path}/config/config.yaml`)
             this.e.reply(`[无用插件]检测到config内配置文件非最新，已重新生成最新配置文件\n请重新发送设置命令`, true)
-            console.log(`[无用插件]尚未检测到config内含有【抽取卡片】的配置，已自动填入，默认1分钟`)
+            logger.debug(`[无用插件]尚未检测到config内含有【抽取卡片】的配置，已自动填入，默认1分钟`)
         } else {
             let msg = this.e.msg
             let value = msg.replace(/[^0-9]/ig, "");
@@ -147,7 +147,7 @@ export class allSetting extends plugin {
         if (configLines < defLines) {
             fs.copyFileSync(`${_path}/def/config.yaml`, `${_path}/config/config.yaml`)
             this.e.reply(`[无用插件]检测到config内配置文件非最新，已重新生成最新配置文件\n请重新发送设置命令`, true)
-            console.log(`[无用插件]尚未检测到config内含有【戳一戳】的配置，已自动填入，默认关闭`)
+            logger.debug(`[无用插件]尚未检测到config内含有【戳一戳】的配置，已自动填入，默认关闭`)
         } else {
             if (e.msg.includes('开启')) {
                 let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
