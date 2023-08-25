@@ -18,7 +18,7 @@ export class queryNumber extends plugin {
                     fnc: 'queryMessyNumber'
                 },
                 {
-                    reg: '^#*(无用)?(查询|查看|检查)(全部|所有)(图片|图)?(数量|张数|数)',
+                    reg: '^#*(无用)?(查询|查看|检查)(全部|所有|乐子)(图片|图)?(数量|张数|数)',
                     fnc: 'queryAll'
                 },
                 {
@@ -29,7 +29,7 @@ export class queryNumber extends plugin {
         })
     }
 
-    async queryHappyNumber() {
+    async queryMessyNumber() {
         let result = fs.existsSync(`${_path}/goodjob-img`)
         if (result === true) {
             const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
