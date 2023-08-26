@@ -32,7 +32,11 @@ export class checkImage extends plugin {
         if (test === false) {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             // API from @云溪院
-            await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`)
+            await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`, {
+                headers: {
+                    'Accept': 'image/png',
+                }
+            })
                 .then(response => {
                     if (!response.ok) {
                         logger.debug('[无用插件]云溪院API 404 Error');
@@ -73,7 +77,11 @@ export class checkImage extends plugin {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             // API from @云溪院
             if (`${role}` == `茄子`) {
-                await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.gif`)
+                await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.gif`, {
+                    headers: {
+                        'Accept': 'image/gif',
+                    }
+                })
                     .then(response => {
                         if (!response.ok) {
                             logger.debug('[无用插件]云溪院API 404 Error');
@@ -89,7 +97,11 @@ export class checkImage extends plugin {
                         logger.error('Error:', error)
                     })
             } else {
-                await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.png`)
+                await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.png`, {
+                    headers: {
+                        'Accept': 'image/png',
+                    }
+                })
                     .then(response => {
                         if (!response.ok) {
                             console.log('[无用插件]云溪院API 404 Error');
