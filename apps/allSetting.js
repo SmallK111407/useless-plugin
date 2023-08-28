@@ -51,10 +51,13 @@ export class allSetting extends plugin {
         if (!res) {
             logger.error('[无用插件]一言接口请求失败！')
             result = `一言接口请求发生了错误...`
+            this.result = result
+        } else {
+            res = await res.json()
+            result = `${res.hitokoto}`
+            this.result = result
         }
-        res = await res.json()
-        result = `${res.hitokoto}`
-        await this.e.reply(`======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${result}`, true)
+        await this.e.reply(`======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, true)
         return true
     }
     async checkSetting() {
