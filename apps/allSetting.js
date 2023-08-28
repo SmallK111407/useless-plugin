@@ -40,19 +40,14 @@ export class allSetting extends plugin {
                 }
             ]
         })
-        if (this.e.isGroup) {
-            this.change = `\n`
-            if (yunzaiName == `trss-yunzai`) {
-                this.change = `\n`
-            } else {
-                this.change = ``
-            }
-        } else {
-            this.change = ``
-        }
     }
     async settingHelp() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
+        if (yunzaiName == `trss-yunzai` && this.e.isGroup) {
+            this.change = `\n`
+        } else {
+            this.change = ``
+        }
         let url = `https://v1.hitokoto.cn/`
         let res = await fetch(url, {
             headers: {
@@ -88,6 +83,11 @@ export class allSetting extends plugin {
     }
     get appconfig() { return setting.getConfig("config") }
     async getSetting() {
+        if (yunzaiName == `trss-yunzai` && this.e.isGroup) {
+            this.change = `\n`
+        } else {
+            this.change = ``
+        }
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
         const abbrSetAuth = this.appconfig['abbrSetAuth']
         let abbrSetAuthResult = String(abbrSetAuth).replace(/0/g, '所有人都可以设置').replace(/1/g, '仅管理员或主人可以设置').replace(/2/g, '仅主人可以设置').trim()
