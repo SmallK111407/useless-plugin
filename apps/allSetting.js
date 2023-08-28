@@ -40,9 +40,14 @@ export class allSetting extends plugin {
                 }
             ]
         })
-        if (yunzaiName == `trss-yunzai`) {
+        if (this.e.isGroup) {
             this.change = `\n`
-        } else if (!this.e.isGroup) {
+            if (yunzaiName == `trss-yunzai`) {
+                this.change = `\n`
+            } else {
+                this.change = ``
+            }
+        } else {
             this.change = ``
         }
     }
