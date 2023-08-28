@@ -49,7 +49,6 @@ export class extractImage extends plugin {
             await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${file[i]}`))
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=all`
             await fetch(url, {
                 headers: {

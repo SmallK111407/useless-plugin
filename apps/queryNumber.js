@@ -38,7 +38,6 @@ export class queryNumber extends plugin {
             return true
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
-            // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=UNKNOWN&type=num`
             await fetch(url, {
                 headers: {
@@ -75,7 +74,6 @@ export class queryNumber extends plugin {
             return true
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
-            // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=num`
             await fetch(url, {
                 headers: {
@@ -106,7 +104,6 @@ export class queryNumber extends plugin {
             return true
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
-            // API from @云溪院
             let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=${role}&type=num`
             await fetch(url, {
                 headers: {

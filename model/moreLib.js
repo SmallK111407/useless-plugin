@@ -1,5 +1,4 @@
 // 代码参考Nwflower/atlas
-// 多图鉴兼容模块
 const list = ['github无用图库', '无用图库' ]
 
 const library = {

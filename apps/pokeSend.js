@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
-export class poke extends plugin {
+export class pokeSend extends plugin {
   constructor() {
     super({
       name: '[无用插件]戳一戳',
@@ -14,14 +14,14 @@ export class poke extends plugin {
       priority: 10,
       rule: [
         {
-          fnc: 'poke'
+          fnc: 'pokeSend'
         }
       ]
     })
   }
   get appconfig() { return setting.getConfig("config") }
 
-  async poke(e) {
+  async pokeSend(e) {
     let result = this.appconfig['poke']
     if (result === false) {
       return false
@@ -37,7 +37,6 @@ export class poke extends plugin {
         await this.reply(segment.image(path))
       } else {
         logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-        // API from @云溪院
         let url = `https://yxy-api.yize.site/api/gaffe/?list=sj&type=json`
         await fetch(url, {
           headers: {

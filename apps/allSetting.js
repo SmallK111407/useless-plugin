@@ -39,16 +39,9 @@ export class allSetting extends plugin {
             ]
         })
     }
-
     async settingHelp() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
-        this.e.reply(`=====无用配置菜单=====
-        \n【#无用检测配置文件】
-        \n【#无用设置别名权限(0|1|2)】
-        \n【#无用设置抽取冷却<数字>】
-        \n【#无用设置戳一戳(开启|关闭)】
-        \n具体作用请见本插件README.md`
-            , true)
+        this.e.reply(`=====无用配置菜单=====\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n具体作用请见本插件README.md`, true)
         return true
     }
     async checkSetting() {
@@ -72,15 +65,10 @@ export class allSetting extends plugin {
         const cdtime = this.appconfig['extractCD']
         const poke = this.appconfig['poke']
         let pokeResult = String(poke).replace(/true/g, '开启').replace(/false/g, '关闭').trim()
-        this.e.reply(`=====无用配置情况=====
-        \n别名权限: ${abbrSetAuthResult}
-        \n抽取冷却: ${cdtime}分钟
-        \n戳一戳: ${pokeResult}
-        \n你可以使用【#无用配置菜单】来查看如何配置`
-            , true)
+        this.e.reply(`=====无用配置情况=====\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n戳一戳: ${pokeResult}\n你可以使用【#无用配置菜单】来查看如何配置`, true)
         return true
     }
-    async abbrSetAuthSetting(e) {
+    async abbrSetAuthSetting() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
         const configLines = fs.readFileSync(`${_path}/config/config.yaml`, 'utf8').split('\n').length;
         const defLines = fs.readFileSync(`${_path}/def/config.yaml`, 'utf8').split('\n').length;
@@ -89,21 +77,21 @@ export class allSetting extends plugin {
             this.e.reply(`[无用插件]检测到config内配置文件非最新，已重新生成最新配置文件\n请重新发送设置命令`, true)
             logger.debug(`[无用插件]尚未检测到config内含有【别名权限】的配置，已自动填入，默认为所有人都可以添加别名`)
         } else {
-            if (e.msg.includes('0')) {
+            if (this.e.msg.includes('0')) {
                 let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
                 let reg = new RegExp(`abbrSetAuth: .*`);
                 let abbrSetAuth = str.replace(reg, `abbrSetAuth: 0`);
                 fs.writeFileSync(`${_path}/config/config.yaml`, abbrSetAuth, "utf8");
                 this.e.reply("[无用插件]别名添加权限已设置为所有人都可以添加！", true)
                 return true
-            } else if (e.msg.includes('1')) {
+            } else if (this.e.msg.includes('1')) {
                 let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
                 let reg = new RegExp(`abbrSetAuth: .*`);
                 let abbrSetAuth = str.replace(reg, `abbrSetAuth: 1`);
                 fs.writeFileSync(`${_path}/config/config.yaml`, abbrSetAuth, "utf8");
                 this.e.reply("[无用插件]别名添加权限已设置为仅群管理员或主人可以添加！", true)
                 return true
-            } else if (e.msg.includes('2')) {
+            } else if (this.e.msg.includes('2')) {
                 let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
                 let reg = new RegExp(`abbrSetAuth: .*`);
                 let abbrSetAuth = str.replace(reg, `abbrSetAuth: 2`);
@@ -140,7 +128,7 @@ export class allSetting extends plugin {
             }
         }
     }
-    async pokeSetting(e) {
+    async pokeSetting() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
         const configLines = fs.readFileSync(`${_path}/config/config.yaml`, 'utf8').split('\n').length;
         const defLines = fs.readFileSync(`${_path}/def/config.yaml`, 'utf8').split('\n').length;
@@ -149,7 +137,7 @@ export class allSetting extends plugin {
             this.e.reply(`[无用插件]检测到config内配置文件非最新，已重新生成最新配置文件\n请重新发送设置命令`, true)
             logger.debug(`[无用插件]尚未检测到config内含有【戳一戳】的配置，已自动填入，默认关闭`)
         } else {
-            if (e.msg.includes('开启')) {
+            if (this.e.msg.includes('开启')) {
                 let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
                 let reg = new RegExp(`poke: .*`);
                 let poke = str.replace(reg, `poke: true`);

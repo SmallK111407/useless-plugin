@@ -17,11 +17,6 @@ export class updateLog extends plugin {
       ]
     })
   }
-  /**
-   * 获取插件更新日志
-   * @param {string} plugin 插件名称
-   * @returns
-   */
   async getLog(plugin = 'useless-plugin') {
     let cm = 'git log  -20 --oneline --pretty=format:"%h||[%cd]  %s" --date=format:"%F %T"'
     if (plugin) {

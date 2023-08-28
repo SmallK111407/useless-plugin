@@ -44,7 +44,6 @@ export class updateGallery extends plugin {
   async update(e) {
     if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return false }
     let libName = '无用图库'
-    // 获取要更新的仓库
     for (let listElement of list) {
       if (this.e.msg && this.e.msg.includes(listElement)) {
         libName = listElement

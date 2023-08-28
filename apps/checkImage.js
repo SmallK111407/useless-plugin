@@ -31,7 +31,6 @@ export class checkImage extends plugin {
         let test = fs.existsSync(`${_path}/goodjob-img`)
         if (test === false) {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            // API from @云溪院
             await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`, {
                 headers: {
                     'Accept': 'image/png',
@@ -39,7 +38,7 @@ export class checkImage extends plugin {
             })
                 .then(response => {
                     if (!response.ok) {
-                        logger.debug('[无用插件]云溪院API 404 Error');
+                        logger.error('[无用插件]云溪院API 404 Error');
                         this.e.reply(`当前所查看图片不存在或是API访问出现问题！\n你可以使用【#查询杂图数量】来查看杂图图片数量`, true)
                         return true
                     } else {
@@ -75,7 +74,6 @@ export class checkImage extends plugin {
         let test = fs.existsSync(`${_path}/goodjob-img`)
         if (test === false) {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            // API from @云溪院
             if (`${role}` == `茄子`) {
                 await fetch(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.gif`, {
                     headers: {
@@ -84,7 +82,7 @@ export class checkImage extends plugin {
                 })
                     .then(response => {
                         if (!response.ok) {
-                            logger.debug('[无用插件]云溪院API 404 Error');
+                            logger.error('[无用插件]云溪院API 404 Error');
                             this.e.reply(`当前所查看图片不存在或是API访问出现问题！\n你可以使用【#查询${role}数量】来查看对应人物的图片数量`, true)
                             return true
                         } else {
@@ -104,11 +102,11 @@ export class checkImage extends plugin {
                 })
                     .then(response => {
                         if (!response.ok) {
-                            console.log('[无用插件]云溪院API 404 Error');
+                            logger.error('[无用插件]云溪院API 404 Error');
                             this.e.reply(`当前所查看图片不存在或是API访问出现问题！\n你可以使用【#查询${role}数量】来查看对应人物的图片数量`, true)
                             return true
                         } else {
-                            console.log('[无用插件]云溪院API访问成功!');
+                            logger.debug('[无用插件]云溪院API访问成功!');
                             this.e.reply(segment.image(`https://yxy-api.yize.site/api/gaffe/goodjob-img/resources/${role}/${number}.png`))
                             return true
                         }
