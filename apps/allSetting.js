@@ -41,9 +41,9 @@ export class allSetting extends plugin {
             ]
         })
         if (yunzaiName == `trss-yunzai`) {
-            this.isReply = `false`
+            this.change = `\n`
         } else {
-            this.isReply = `true`
+            this.change = ``
         }
     }
     async settingHelp() {
@@ -65,7 +65,7 @@ export class allSetting extends plugin {
             this.result = result
         }
 
-        await this.e.reply(`======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, this.isReply)
+        await this.e.reply(`${this.change}======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, true)
         return true
     }
     async checkSetting() {
@@ -89,7 +89,7 @@ export class allSetting extends plugin {
         const cdtime = this.appconfig['extractCD']
         const poke = this.appconfig['poke']
         let pokeResult = String(poke).replace(/true/g, '开启').replace(/false/g, '关闭').trim()
-        await this.e.reply(`======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, this.isReply)
+        await this.e.reply(`${this.change}======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, true)
         return true
     }
     async abbrSetAuthSetting() {
