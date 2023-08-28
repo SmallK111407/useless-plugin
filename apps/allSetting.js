@@ -1,8 +1,10 @@
 import plugin from '../../../lib/plugins/plugin.js';
+import cfg from '../../../lib/config/config.js';
 import setting from '../model/setting.js';
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
+const yunzaiName = cfg.package.name
 
 export class allSetting extends plugin {
     constructor() {
@@ -38,6 +40,11 @@ export class allSetting extends plugin {
                 }
             ]
         })
+        if (yunzaiName == `trss-yunzai`) {
+            this.isReply = `false`
+        } else {
+            this.isReply = `true`
+        }
     }
     async settingHelp() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
@@ -57,7 +64,8 @@ export class allSetting extends plugin {
             result = `${res.hitokoto}`
             this.result = result
         }
-        await this.e.reply(`======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, true)
+
+        await this.e.reply(`======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, this.isReply)
         return true
     }
     async checkSetting() {
@@ -81,7 +89,7 @@ export class allSetting extends plugin {
         const cdtime = this.appconfig['extractCD']
         const poke = this.appconfig['poke']
         let pokeResult = String(poke).replace(/true/g, '开启').replace(/false/g, '关闭').trim()
-        await this.e.reply(`======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, true)
+        await this.e.reply(`======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, this.isReply)
         return true
     }
     async abbrSetAuthSetting() {
