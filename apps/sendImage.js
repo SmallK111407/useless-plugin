@@ -1,6 +1,6 @@
-import plugin from '../../../lib/plugins/plugin.js';
-import alias from '../model/alias.js';
-import fs from 'node:fs';
+import plugin from '../../../lib/plugins/plugin.js'
+import alias from '../model/alias.js'
+import fs from 'node:fs'
 import fetch from 'node-fetch'
 
 

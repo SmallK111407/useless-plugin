@@ -1,6 +1,6 @@
-import plugin from '../../../lib/plugins/plugin.js';
-import cfg from '../../../lib/config/config.js';
-import setting from '../model/setting.js';
+import plugin from '../../../lib/plugins/plugin.js'
+import cfg from '../../../lib/config/config.js'
+import setting from '../model/setting.js'
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'

@@ -1,6 +1,6 @@
-import plugin from '../../../lib/plugins/plugin.js';
-import setting from "../model/setting.js";
-import fs from "node:fs";
+import plugin from '../../../lib/plugins/plugin.js'
+import setting from "../model/setting.js"
+import fs from "node:fs"
 import fetch from 'node-fetch'
 
 const _path = process.cwd() + '/plugins/useless-plugin'

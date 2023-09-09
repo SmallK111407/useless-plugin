@@ -1,6 +1,6 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import common from "../../../lib/common/common.js"
-import { execSync } from "child_process";
+import { execSync } from "child_process"
 
 export class updateLog extends plugin {
   constructor() {
