@@ -25,8 +25,8 @@ export class checkEggplant extends plugin {
             return true
         }
         let eggplantPath = `${_path}/goodjob-img/resources/茄子/`
-        let msg = [([segment.image(`${eggplantPath}0.gif`), segment.image(`${eggplantPath}1.gif`), segment.image(`${eggplantPath}2.gif`), segment.image(`${eggplantPath}3.gif`), segment.image(`${eggplantPath}4.gif`), segment.image(`${eggplantPath}5.gif`), segment.image(`${eggplantPath}6.gif`), segment.image(`${eggplantPath}7.gif`), segment.image(`${eggplantPath}8.gif`), segment.image(`${eggplantPath}9.gif`), segment.image(`${eggplantPath}10.gif`), segment.image(`${eggplantPath}11.gif`), segment.image(`${eggplantPath}12.gif`), segment.image(`${eggplantPath}13.gif`)])]
-        await this.e.reply(await common.makeForwardMsg(this.e, msg, `点我查看茄子合集`))
+        let msg = [([segment.image(`${eggplantPath}0.gif`), segment.image(`${eggplantPath}1.gif`), segment.image(`${eggplantPath}2.gif`), segment.image(`${eggplantPath}3.gif`), segment.image(`${eggplantPath}4.gif`), segment.image(`${eggplantPath}5.gif`), segment.image(`${eggplantPath}6.gif`), segment.image(`${eggplantPath}7.gif`), segment.image(`${eggplantPath}8.gif`), segment.image(`${eggplantPath}9.gif`), segment.image(`${eggplantPath}10.gif`), segment.image(`${eggplantPath}11.gif`), segment.image(`${eggplantPath}12.gif`), segment.image(`${eggplantPath}13.gif`), segment.image(`${eggplantPath}14.gif`)])]
+        await this.e.reply(await common.makeForwardMsg(this.e, msg, `超长的茄子来啦！`))
         return true
     }
 }
