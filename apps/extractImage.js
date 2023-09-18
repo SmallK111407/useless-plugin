@@ -26,7 +26,7 @@ export class extractImage extends plugin {
     async extractImage() {
         let cdtime = this.appconfig['extractCD']
         if (CD[this.e.user_id] && !this.e.isMaster) {
-            e.reply('每' + cdtime + '分钟只能抽取一次哦！')
+            this.e.reply('每' + cdtime + '分钟只能抽取一次哦！')
             return true
         }
         CD[this.e.user_id] = true
