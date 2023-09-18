@@ -23,15 +23,15 @@ export class extractImage extends plugin {
     }
     get appconfig() { return setting.getConfig("config") }
 
-    async extractImage(e) {
+    async extractImage() {
         let cdtime = this.appconfig['extractCD']
-        if (CD[e.user_id] && !e.isMaster) {
+        if (CD[this.e.user_id] && !this.e.isMaster) {
             e.reply('每' + cdtime + '分钟只能抽取一次哦！')
             return true
         }
-        CD[e.user_id] = true
-        CD[e.user_id] = setTimeout(() => {
-            if (CD[e.user_id]) delete CD[e.user_id]
+        CD[this.e.user_id] = true
+        CD[this.e.user_id] = setTimeout(() => {
+            if (CD[this.e.user_id]) delete CD[this.e.user_id]
         }, cdtime * 60 * 1000)
         let result = fs.existsSync(`${_path}/goodjob-img`)
         if (result === true) {

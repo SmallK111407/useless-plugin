@@ -24,13 +24,13 @@ export class checkEggplant extends plugin {
 
     async checkEggplant() {
         let cdtime = this.appconfig['eggplantCD']
-        if (CD[e.user_id] && !e.isMaster) {
+        if (CD[this.e.user_id] && !this.e.isMaster) {
             e.reply('每' + cdtime + '分钟只能看一次全部茄子哦！')
             return true
         }
-        CD[e.user_id] = true
-        CD[e.user_id] = setTimeout(() => {
-            if (CD[e.user_id]) delete CD[e.user_id]
+        CD[this.e.user_id] = true
+        CD[this.e.user_id] = setTimeout(() => {
+            if (CD[this.e.user_id]) delete CD[this.e.user_id]
         }, cdtime * 60 * 1000)
         if (!fs.existsSync(`${_path}/goodjob-img`)) {
             await this.e.reply(`[无用插件]检测到尚未安装无用图库，请发送【#无用图库更新】安装图库！`, true)
