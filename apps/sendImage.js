@@ -37,7 +37,7 @@ export class sendImage extends plugin {
             await this.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=UNKNOWN&type=json`
+            let url = `https://yunxiyuan.xyz/api/gaffe/index.php?list=UNKNOWN&type=json`
             await fetch(url, {
                 headers: {
                     'Accept': 'application/json',
@@ -64,7 +64,7 @@ export class sendImage extends plugin {
             await this.reply(segment.image(path))
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            let url = `https://yxy-api.yize.site/api/gaffe/?list=sj&type=json`
+            let url = `https://yunxiyuan.xyz/api/gaffe/?list=sj&type=json`
             await fetch(url, {
                 headers: {
                     'Accept': 'application/json',
@@ -93,7 +93,7 @@ export class sendImage extends plugin {
             await this.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`))
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            let url = `https://yxy-api.yize.site/api/gaffe/index.php?list=${role}&type=json`
+            let url = `https://yunxiyuan.xyz/api/gaffe/index.php?list=${role}&type=json`
             await fetch(url, {
                 headers: {
                     'Accept': 'application/json',
