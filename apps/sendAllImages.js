@@ -39,7 +39,7 @@ export class sendAllImages extends plugin {
                 }
             }
             let reply = await this.e.reply(await common.makeForwardMsg(this.e, msg, `点击查看全部「${role}」，共${files.length}张`))
-            if (!reply) this.e.reply(`发送失败...可能是图片过多，可尝试私聊查看`, true)
+            if (!reply) this.e.reply(`发送失败了，可能是图片过多...`, true)
         } catch (error) {
             logger.error(error)
         }
