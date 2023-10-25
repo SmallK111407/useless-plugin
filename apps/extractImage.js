@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
-let CD = {}
+const CD = {}
 export class extractImage extends plugin {
     constructor() {
         super({

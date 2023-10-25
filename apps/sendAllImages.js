@@ -22,6 +22,8 @@ export class sendAllImages extends plugin {
             ]
         })
     }
+    get appconfig() { return setting.getConfig("config") }
+    
     async sendAllImages() {
         let cdtime = this.appconfig['allCD']
         if (CD[this.e.user_id] && !this.e.isMaster) {
