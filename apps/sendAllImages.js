@@ -1,6 +1,7 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import common from '../../../lib/common/common.js'
 import alias from '../model/alias.js'
+import setting from '../model/setting.js'
 import fs from 'node:fs'
 import path from 'path'
 
