@@ -5,7 +5,7 @@ import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
-let CD = {}
+const CD = {}
 export class checkEggplant extends plugin {
     constructor() {
         super({

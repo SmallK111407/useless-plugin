@@ -3,9 +3,10 @@ abbrSetAuth: 0
 
 # 抽取图片功能冷却时间 单位：分钟
 extractCD: 1
+allCD: 15
 
 # 全部茄子功能冷却时间 单位：分钟
-eggplantCD: 1
+eggplantCD: 15
 
 # 戳一戳开关 true-开 false-关
-poke: false
+poke: true

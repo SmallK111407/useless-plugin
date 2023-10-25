@@ -6,6 +6,7 @@ import path from 'path'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
+const CD = {}
 export class sendAllImages extends plugin {
     constructor() {
         super({
@@ -22,6 +23,15 @@ export class sendAllImages extends plugin {
         })
     }
     async sendAllImages() {
+        let cdtime = this.appconfig['allCD']
+        if (CD[this.e.user_id] && !this.e.isMaster) {
+            this.e.reply('每' + cdtime + '分钟只能看一次全部图片哦！')
+            return true
+        }
+        CD[this.e.user_id] = true
+        CD[this.e.user_id] = setTimeout(() => {
+            if (CD[this.e.user_id]) delete CD[this.e.user_id]
+        }, cdtime * 60 * 1000)
         let reg = this.e.msg.replace(/#|无用|查看|发送|全部|所有/g, '').trim()
         let name = reg
         let role = alias.get(name)
