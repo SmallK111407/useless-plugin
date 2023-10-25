@@ -35,6 +35,10 @@ export class allSetting extends plugin {
                     fnc: 'extractSetting'
                 },
                 {
+                    reg: '^#*无用设置(全部|所有)人物冷却(.*)(分|分钟)?$',
+                    fnc: 'allCDSetting'
+                },
+                {
                     reg: '^#*无用设置(全部|所有)?茄子冷却(.*)(分|分钟)?$',
                     fnc: 'eggplantSetting'
                 },
@@ -69,7 +73,7 @@ export class allSetting extends plugin {
             this.result = result
         }
 
-        await this.e.reply(`${this.change}======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置茄子冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, true)
+        await this.e.reply(`${this.change}======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置全部人物冷却<数字>】\n【#无用设置茄子冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, true)
         return true
     }
     async checkSetting() {
@@ -96,10 +100,11 @@ export class allSetting extends plugin {
         const abbrSetAuth = this.appconfig['abbrSetAuth']
         let abbrSetAuthResult = String(abbrSetAuth).replace(/0/g, '所有人都可以设置').replace(/1/g, '仅管理员或主人可以设置').replace(/2/g, '仅主人可以设置').trim()
         const cdtime = this.appconfig['extractCD']
+        const allCDtime = this.appconfig['allCD']
         const eggplantcdtime = this.appconfig['eggplantCD']
         const poke = this.appconfig['poke']
         let pokeResult = String(poke).replace(/true/g, '开启').replace(/false/g, '关闭').trim()
-        await this.e.reply(`${this.change}======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n全部茄子冷却: ${eggplantcdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, true)
+        await this.e.reply(`${this.change}======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n全部人物冷却: ${allCDtime}分钟\n全部茄子冷却: ${eggplantcdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, true)
         return true
     }
     async abbrSetAuthSetting() {
@@ -158,6 +163,59 @@ export class allSetting extends plugin {
                 let extractCD = str.replace(reg, `extractCD: ${value}`);
                 fs.writeFileSync(`${_path}/config/config.yaml`, extractCD, "utf8");
                 await this.e.reply(`[无用插件]抽取卡片冷却时间已设置为${value}分钟`, true)
+                return true
+            }
+        }
+    }
+    async eggplantSetting() {
+        if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
+        const configLines = fs.readFileSync(`${_path}/config/config.yaml`, 'utf8').split('\n').length;
+        const defLines = fs.readFileSync(`${_path}/def/config.yaml`, 'utf8').split('\n').length;
+        if (configLines < defLines) {
+            fs.copyFileSync(`${_path}/def/config.yaml`, `${_path}/config/config.yaml`)
+            await this.e.reply(`[无用插件]检测到config内配置文件非最新，已重新生成最新配置文件\n请重新发送设置命令`, true)
+            logger.debug(`[无用插件]尚未检测到config内含有【抽取卡片】的配置，已自动填入，默认1分钟`)
+        } else {
+            let msg = this.e.msg
+            let value = msg.replace(/[^0-9]/ig, "");
+            if (value === "") {
+                await this.e.reply("[无用插件]请键入有效数字！", true)
+            } else if (value < 0) {
+                await this.e.reply("[无用插件]不能键入0以下的数字！", true)
+            } else if (value > 1440) {
+                await this.e.reply("[无用插件]不能键入1440以上的数字！", true)
+            } else {
+                let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
+                let reg = new RegExp(`eggplantCD: .*`);
+                let eggplantCD = str.replace(reg, `eggplantCD: ${value}`);
+                fs.writeFileSync(`${_path}/config/config.yaml`, eggplantCD, "utf8");
+                await this.e.reply(`[无用插件]全部茄子冷却时间已设置为${value}分钟`, true)
+                return true
+            }
+        }
+    }async allCDSetting() {
+        if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
+        const configLines = fs.readFileSync(`${_path}/config/config.yaml`, 'utf8').split('\n').length;
+        const defLines = fs.readFileSync(`${_path}/def/config.yaml`, 'utf8').split('\n').length;
+        if (configLines < defLines) {
+            fs.copyFileSync(`${_path}/def/config.yaml`, `${_path}/config/config.yaml`)
+            await this.e.reply(`[无用插件]检测到config内配置文件非最新，已重新生成最新配置文件\n请重新发送设置命令`, true)
+            logger.debug(`[无用插件]尚未检测到config内含有【抽取卡片】的配置，已自动填入，默认1分钟`)
+        } else {
+            let msg = this.e.msg
+            let value = msg.replace(/[^0-9]/ig, "");
+            if (value === "") {
+                await this.e.reply("[无用插件]请键入有效数字！", true)
+            } else if (value < 0) {
+                await this.e.reply("[无用插件]不能键入0以下的数字！", true)
+            } else if (value > 1440) {
+                await this.e.reply("[无用插件]不能键入1440以上的数字！", true)
+            } else {
+                let str = fs.readFileSync(`${_path}/config/config.yaml`, "utf8")
+                let reg = new RegExp(`allCD: .*`);
+                let allCD = str.replace(reg, `allCD: ${value}`);
+                fs.writeFileSync(`${_path}/config/config.yaml`, allCD, "utf8");
+                await this.e.reply(`[无用插件]全部人物冷却时间已设置为${value}分钟`, true)
                 return true
             }
         }
