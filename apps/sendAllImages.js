@@ -24,7 +24,7 @@ export class sendAllImages extends plugin {
         })
     }
     get appconfig() { return setting.getConfig("config") }
-    
+
     async sendAllImages() {
         let cdtime = this.appconfig['allCD']
         if (CD[this.e.user_id] && !this.e.isMaster) {
@@ -37,6 +37,7 @@ export class sendAllImages extends plugin {
         }, cdtime * 60 * 1000)
         let reg = this.e.msg.replace(/#|无用|查看|发送|全部|所有/g, '').trim()
         let name = reg
+        if (name == "杂图" || name == "UNKNOWN") return this.e.reply(`不支持查看全部杂图！`, true)
         let role = alias.get(name)
         if (!role) return false
         try {

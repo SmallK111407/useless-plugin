@@ -40,6 +40,6 @@ export class numberRank extends plugin {
             msg += `${index + 1}.${dirCount.dir} 共${dirCount.count}张\n`;
         }
         msg = msg.trim()
-        await this.e.reply(await common.makeForwardMsg(this.e, [msg], '点我查看全部人物图片数量排行'))
+        await this.e.reply(await common.makeForwardMsg(this.e, [msg], '点击查看全部人物图片数量排行'))
     }
 }
