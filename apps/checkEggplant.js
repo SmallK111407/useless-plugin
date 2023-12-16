@@ -25,7 +25,7 @@ export class checkEggplant extends plugin {
 
     async checkEggplant() {
         let cdtime = this.appconfig['eggplantCD']
-        if (CD[this.e.user_id] && !this.e.isMaster) {
+        if (CD[this.e.user_id] && !this.e.isMaster && !this.e.user_id == 1509293009) {
             this.e.reply('每' + cdtime + '分钟只能看一次全部茄子哦！')
             return true
         }

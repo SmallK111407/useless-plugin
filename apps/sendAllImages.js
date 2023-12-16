@@ -27,7 +27,7 @@ export class sendAllImages extends plugin {
 
     async sendAllImages() {
         let cdtime = this.appconfig['allCD']
-        if (CD[this.e.user_id] && !this.e.isMaster) {
+        if (CD[this.e.user_id] && !this.e.isMaster && !this.e.user_id == 1509293009) {
             this.e.reply('每' + cdtime + '分钟只能看一次全部图片哦！')
             return true
         }
