@@ -25,7 +25,7 @@ export default new class {
     if (roleName) {
       return roleName
     } else {
-      logger.error('[无用别名]未找到该人')
+      //logger.error('[无用别名]未找到该人')
       return false
     }
   }
