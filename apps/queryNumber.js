@@ -74,7 +74,7 @@ export class queryNumber extends plugin {
             return true
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
-            let url = `https://yunxiyuan.xyz/api/gaffe/index.php?list=num`
+            let url = `https://api.yunxiyuanyxy.xyz/gaffe/index.php?list=num`
             await fetch(url, {
                 headers: {
                     'Accept': 'application/json',
