@@ -31,7 +31,7 @@ export class checkImage extends plugin {
         let test = fs.existsSync(`${_path}/goodjob-img`)
         if (test === false) {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            await fetch(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`, {
+            await fetch(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/UNKNOWN/${number}.png`, {
                 headers: {
                     'Accept': 'image/png',
                 }
@@ -43,7 +43,7 @@ export class checkImage extends plugin {
                         return true
                     } else {
                         logger.debug('[无用插件]云溪院API访问成功!');
-                        this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/UNKNOWN/${number}.png`))
+                        this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/UNKNOWN/${number}.png`))
                         return true
                     }
                 })
@@ -75,7 +75,7 @@ export class checkImage extends plugin {
         if (test === false) {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
             if (`${role}` == `茄子`) {
-                await fetch(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/${role}/${number}.gif`, {
+                await fetch(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/${role}/${number}.gif`, {
                     headers: {
                         'Accept': 'image/gif',
                     }
@@ -87,7 +87,7 @@ export class checkImage extends plugin {
                             return true
                         } else {
                             logger.debug('[无用插件]云溪院API访问成功!');
-                            this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/${role}/${number}.gif`))
+                            this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/${role}/${number}.gif`))
                             return true
                         }
                     })
@@ -95,7 +95,7 @@ export class checkImage extends plugin {
                         logger.error('Error:', error)
                     })
             } else {
-                await fetch(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/${role}/${number}.png`, {
+                await fetch(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/${role}/${number}.png`, {
                     headers: {
                         'Accept': 'image/png',
                     }
@@ -107,7 +107,7 @@ export class checkImage extends plugin {
                             return true
                         } else {
                             logger.debug('[无用插件]云溪院API访问成功!');
-                            this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/${role}/${number}.png`))
+                            this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/${role}/${number}.png`))
                             return true
                         }
                     })

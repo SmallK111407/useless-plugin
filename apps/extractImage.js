@@ -49,7 +49,7 @@ export class extractImage extends plugin {
             await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${file[i]}`))
         } else {
             logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图')
-            let url = `https://api.yunxiyuanyxy.xyz/gaffe/index.php?list=all`
+            let url = `https://api.yunxiyuanyxy.xyz/gaffe/gitee/index.php?list=all`
             await fetch(url, {
                 headers: {
                     'Accept': 'application/json',
@@ -61,7 +61,7 @@ export class extractImage extends plugin {
                     const randomIndex = Math.floor(Math.random() * data.length);
                     const randomData = data[randomIndex];
                     let character = randomData
-                    const url = `https://api.yunxiyuanyxy.xyz/gaffe/index.php?list=${randomData}&type=all`
+                    const url = `https://api.yunxiyuanyxy.xyz/gaffe/gitee/index.php?list=${randomData}&type=all`
                     logger.debug(randomData);
                     fetch(url, {
                         headers: {
@@ -78,10 +78,10 @@ export class extractImage extends plugin {
                             let number = Number(i) + 1
                             this.e.reply(`您本次抽取到的人物为「${character}」\n本图片是TA的第${number}张图哦~`, true)
                             if (`${character}` == `茄子`) {
-                                this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/${character}/${i}.gif`))
+                                this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/${character}/${i}.gif`))
                                 return true
                             } else {
-                                this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/${character}/${i}.png`))
+                                this.e.reply(segment.image(`https://api.yunxiyuanyxy.xyz/gaffe/gitee/goodjob-img/resources/${character}/${i}.png`))
                                 return true
                             }
                         })
