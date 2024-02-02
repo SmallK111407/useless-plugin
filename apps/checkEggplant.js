@@ -15,7 +15,7 @@ export class checkEggplant extends plugin {
             priority: 10,
             rule: [
                 {
-                    reg: '^#*(无用)?(全部|所有)茄子$',
+                    reg: '^#*(无用)?(查看)?(全部|所有)茄子$',
                     fnc: 'checkEggplant'
                 }
             ]
@@ -33,16 +33,14 @@ export class checkEggplant extends plugin {
         CD[this.e.user_id] = setTimeout(() => {
             if (CD[this.e.user_id]) delete CD[this.e.user_id]
         }, cdtime * 60 * 1000)
-        if (!fs.existsSync(`${_path}/goodjob-img`)) {
-            await this.e.reply(`[无用插件]检测到尚未安装无用图库，请发送【#无用图库更新】安装图库！`, true)
-            return true
-        }
-        let eggplantPath = _path + '/goodjob-img/resources/茄子/';
-        let numbers = Array.from({length: 15}, (v, i) => i);
-        let images = numbers.map(n => eggplantPath + n + '.gif');
-        let msg = images.map(segment.image);
+        let eggplantPath = _path + "/goodjob-img/resources/茄子/";
+        let yxyurl = "https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/茄子/";
+        let numbers = Array.from({ length: 15 }, (v, i) => i);
+        let images = numbers.map((n) => `${eggplantPath}${n}.gif`);
+        let yxyurlimages = numbers.map((n) => `${yxyurl}${n}.gif`);
+        let msg = fs.existsSync(eggplantPath) ? images.map(segment.image) : (logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图'), yxyurlimages.map(segment.image));
         await this.e.reply(await common.makeForwardMsg(this.e, msg, '超长的茄子来啦！'));
-        
+
         return true
     }
 }
