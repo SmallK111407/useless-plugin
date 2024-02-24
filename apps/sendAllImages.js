@@ -43,7 +43,8 @@ export class sendAllImages extends plugin {
         try {
             let msg = []
             const dirPath = `${_path}/goodjob-img/resources/${role}`
-            const files = await fs.readdirSync(dirPath);
+            let files = await fs.readdirSync(dirPath);
+            files = files.sort((a, b) => parseInt(a) - parseInt(b));
             for (let i = 0; i < files.length; i++) {
                 let file = files[i];
                 let filePath = path.join(dirPath, file);
