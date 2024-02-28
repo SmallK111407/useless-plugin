@@ -22,6 +22,7 @@ export class numberRank extends plugin {
     }
 
     async numberRank() {
+        if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
         const parentDir = `${_path}/goodjob-img/resources/`
         const subDirs = fs.readdirSync(parentDir).filter(file =>
             fs.statSync(path.join(parentDir, file)).isDirectory() && file !== 'UNKNOWN'

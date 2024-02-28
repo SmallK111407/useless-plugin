@@ -1,7 +1,6 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import alias from '../model/alias.js'
 import fs from 'node:fs'
-import fetch from 'node-fetch'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
@@ -30,94 +29,40 @@ export class queryNumber extends plugin {
     }
 
     async queryMessyNumber() {
-        let result = fs.existsSync(`${_path}/goodjob-img`)
-        if (result === true) {
-            const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
-            let number = Math.floor(files.length)
-            await this.reply(`当前所查询「杂图」\n目前总共已收录${number}张图片`, true)
-            return true
-        } else {
-            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
-            let url = `https://api.yunxiyuanyxy.xyz/gaffe/gitee/index.php?list=UNKNOWN&type=num`
-            await fetch(url, {
-                headers: {
-                    'Accept': 'application/json',
-                }
-            }).catch((err) => logger.error(err))
-                .then(response =>
-                    response.json())
-                .then(data => {
-                    const imageCount = data.image_count;
-                    logger.debug(data.image_count);
-                    this.e.reply(`当前所查询「杂图」\n目前总共已收录${imageCount}张图片`, true)
-                })
-            return true
-        }
+        if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
+        const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
+        let number = Math.floor(files.length)
+        await this.reply(`当前所查询「杂图」\n目前总共已收录${number}张图片`, true)
+        return true
     }
     async queryAll() {
-        let result = fs.existsSync(`${_path}/goodjob-img`)
-        if (result === true) {
-            let count = 0;
-            function countImages(folder) {
-                const files = fs.readdirSync(folder);
-                for (const file of files) {
-                    const path = folder + '/' + file;
-                    if (fs.statSync(path).isDirectory()) {
-                        countImages(path);
-                    } else if (/\.(jpe?g|png|gif)$/i.test(file)) {
-                        count++;
-                    }
+        if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
+        let count = 0;
+        function countImages(folder) {
+            const files = fs.readdirSync(folder);
+            for (const file of files) {
+                const path = folder + '/' + file;
+                if (fs.statSync(path).isDirectory()) {
+                    countImages(path);
+                } else if (/\.(jpe?g|png|gif)$/i.test(file)) {
+                    count++;
                 }
             }
-            countImages(`${_path}/goodjob-img`)
-            this.e.reply(`目前本图库总共已收录${count}张图片`, true)
-            return true
-        } else {
-            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
-            let url = `https://api.yunxiyuanyxy.xyz/gaffe/gitee/index.php?list=num`
-            await fetch(url, {
-                headers: {
-                    'Accept': 'application/json',
-                }
-            }).catch((err) => logger.error(err))
-                .then(response =>
-                    response.json())
-                .then(data => {
-                    const count = data.num;
-                    logger.debug(data.num);
-                    this.e.reply(`目前本图库总共已收录${count}张图片`, true)
-                })
-            return true
         }
+        countImages(`${_path}/goodjob-img`)
+        this.e.reply(`目前本图库总共已收录${count}张图片`, true)
+        return true
     }
     async queryNumber() {
+        if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
         let msg = this.e.msg
         let reg = msg.replace(/#|无用|查询|查看|图片|图|数量|张数|数/g, '').trim()
         let name = reg
         let role = alias.get(name)
         if (!role) return false
-        let result = fs.existsSync(`${_path}/goodjob-img`)
-        if (result === true) {
-            const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
-            let number = Math.floor(files.length)
-            await this.reply(`当前所查询人物「${role}」\n目前总共已收录${number}张图片`, true)
-            return true
-        } else {
-            logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】查询')
-            let url = `https://api.yunxiyuanyxy.xyz/gaffe/gitee/index.php?list=${role}&type=num`
-            await fetch(url, {
-                headers: {
-                    'Accept': 'application/json',
-                }
-            }).catch((err) => logger.error(err))
-                .then(response =>
-                    response.json())
-                .then(data => {
-                    const imageCount = data.image_count;
-                    logger.debug(data.image_count);
-                    this.e.reply(`当前所查询人物「${role}」\n目前总共已收录${imageCount}张图片`, true)
-                })
-            return true
-        }
+        const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
+        let number = Math.floor(files.length)
+        await this.reply(`当前所查询人物「${role}」\n目前总共已收录${number}张图片`, true)
+        return true
     }
 }

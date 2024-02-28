@@ -6,7 +6,7 @@ import setting from '../model/setting.js'
 import YAML from 'yaml'
 
 export class abbrSet extends plugin {
-  constructor(e) {
+  constructor() {
     super({
       name: '[无用插件]别名设置',
       dsc: '无用插件别名设置',

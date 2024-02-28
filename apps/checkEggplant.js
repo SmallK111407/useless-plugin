@@ -1,7 +1,6 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import common from '../../../lib/common/common.js'
 import setting from '../model/setting.js'
-import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
@@ -24,6 +23,7 @@ export class checkEggplant extends plugin {
     get appconfig() { return setting.getConfig("config") }
 
     async checkEggplant() {
+        if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
         let cdtime = this.appconfig['eggplantCD']
         if (CD[this.e.user_id] && !this.e.isMaster && !this.e.user_id == 1509293009) {
             this.e.reply('每' + cdtime + '分钟只能看一次全部茄子哦！')
@@ -33,14 +33,11 @@ export class checkEggplant extends plugin {
         CD[this.e.user_id] = setTimeout(() => {
             if (CD[this.e.user_id]) delete CD[this.e.user_id]
         }, cdtime * 60 * 1000)
-        let eggplantPath = _path + "/goodjob-img/resources/茄子/";
-        let yxyurl = "https://api.yunxiyuanyxy.xyz/gaffe/goodjob-img/resources/茄子/";
-        let numbers = Array.from({ length: 15 }, (v, i) => i);
-        let images = numbers.map((n) => `${eggplantPath}${n}.gif`);
-        let yxyurlimages = numbers.map((n) => `${yxyurl}${n}.gif`);
-        let msg = fs.existsSync(eggplantPath) ? images.map(segment.image) : (logger.debug('[无用插件]未发现安装了本地图库，将尝试使用【云溪院API】返图'), yxyurlimages.map(segment.image));
-        await this.e.reply(await common.makeForwardMsg(this.e, msg, '超长的茄子来啦！'));
-
+        let eggplantPath = _path + '/goodjob-img/resources/茄子/';
+        let numbers = Array.from({length: 15}, (v, i) => i);
+        let images = numbers.map(n => eggplantPath + n + '.gif');
+        let msg = images.map(segment.image);
+        await this.e.reply(await common.makeForwardMsg(this.e, [msg], '超长的茄子来啦！'))
         return true
     }
 }

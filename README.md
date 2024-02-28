@@ -14,7 +14,8 @@ _♥这只是一个 “玩笑” ♥_
 
 通过云崽随机发送云崽圈子一些人不寻常、逆天、乐子、搞笑、有趣等等的发言。
 
-聊天群[861663639](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=nZyWO_U-K8ui-K2KnkMdDkYKEzS02Vua&authKey=W7pl9kMvRDPXak3noKsjTJLY7QnuJIARjFL2QeZAbuw9rqWInjj2HIJyL1Mlq4MX&noverify=0&group_code=861663639)
+我的原神群[285258025](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=9Fx5uUBjOPGuAvf-L-lXwkj4M9PAoytZ&authKey=nQ9xxvMPl1spFsQOrPfcl4aGJDASFGD5HRlgTXwsHIflNV8G6YXDeyIbLp%2FelueR&noverify=0&group_code=285258025)
+本插件聊天群[861663639](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=nZyWO_U-K8ui-K2KnkMdDkYKEzS02Vua&authKey=W7pl9kMvRDPXak3noKsjTJLY7QnuJIARjFL2QeZAbuw9rqWInjj2HIJyL1Mlq4MX&noverify=0&group_code=861663639)
 
 ## 安装方式
 
@@ -41,11 +42,9 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 发送`#无用图库更新`即可自动下载资源，等待机器人回复即可！
 
-**注意**:本插件已对接**云溪院API**，即使不下载图库也可以使用！
+后续也可通过此命令进行图库的更新
 
-更建议下载图库，本地返回图片速度会比API返回图片速度**更胜一筹**，也更稳定！
-
-若部分地区访问不上**云溪院API**，请下载图库使用，感谢谅解！
+**注意**:本插件一定要下载图库才能使用！
 
 ### 2.随机发送图片
 
@@ -130,6 +129,5 @@ git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/
 
 ## 其他或致谢
 * 本项目遵循[MIT](./LICENSE)开源协议
-* [云溪院](https://yunxiyuan.xyz/)
 * 感谢所有提交图片的贡献者
 * 您的Star是我们更新的最大动力！
