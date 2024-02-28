@@ -14,7 +14,7 @@ _♥这只是一个 “玩笑” ♥_
 
 通过云崽随机发送云崽圈子一些人不寻常、逆天、乐子、搞笑、有趣等等的发言。
 
-我的原神群[285258025](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=9Fx5uUBjOPGuAvf-L-lXwkj4M9PAoytZ&authKey=nQ9xxvMPl1spFsQOrPfcl4aGJDASFGD5HRlgTXwsHIflNV8G6YXDeyIbLp%2FelueR&noverify=0&group_code=285258025)
+我的原神星铁聊天群[285258025](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=9Fx5uUBjOPGuAvf-L-lXwkj4M9PAoytZ&authKey=nQ9xxvMPl1spFsQOrPfcl4aGJDASFGD5HRlgTXwsHIflNV8G6YXDeyIbLp%2FelueR&noverify=0&group_code=285258025)
 本插件聊天群[861663639](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=nZyWO_U-K8ui-K2KnkMdDkYKEzS02Vua&authKey=W7pl9kMvRDPXak3noKsjTJLY7QnuJIARjFL2QeZAbuw9rqWInjj2HIJyL1Mlq4MX&noverify=0&group_code=861663639)
 
 ## 安装方式
