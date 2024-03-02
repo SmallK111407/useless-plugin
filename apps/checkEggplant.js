@@ -1,6 +1,7 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import common from '../../../lib/common/common.js'
 import setting from '../model/setting.js'
+import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
