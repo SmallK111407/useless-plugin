@@ -45,19 +45,18 @@ export class sendAllImages extends plugin {
         let role = alias.get(name)
         if (!role) return false
         try {
-            let msg = []
             const dirPath = `${_path}/goodjob-img/resources/${role}`
             let files = await fs.readdirSync(dirPath);
             files = files.sort((a, b) => parseInt(a) - parseInt(b));
+            let msg = [`点击查看全部「${role}」，共${files.length}张\n`]
             for (let i = 0; i < files.length; i++) {
                 let file = files[i];
                 let filePath = path.join(dirPath, file);
                 let isImage = ['.jpeg', '.jpg', '.gif', '.png'].some(i => filePath.endsWith(i));
-                if (isImage) {
-                    msg.push([`${i + 1}`, segment.image(filePath)]);
-                }
+                if (isImage)
+                    msg.push(`${i + 1}`, segment.image(filePath));
             }
-            let reply = await this.e.reply(await common.makeForwardMsg(this.e, msg, `点击查看全部「${role}」，共${files.length}张`))
+            let reply = await this.e.reply(await common.makeForwardMsg(this.e, [msg]))
             if (!reply) this.e.reply(`发送失败了，可能是图片过多...\n当前所查看人物图片数量共${files.length}张`, true)
         } catch (error) {
             logger.error(error)
