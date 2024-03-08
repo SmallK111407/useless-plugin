@@ -37,8 +37,9 @@ export class checkEggplant extends plugin {
         let eggplantPath = _path + '/goodjob-img/resources/茄子/';
         let numbers = Array.from({length: 15}, (v, i) => i);
         let images = numbers.map(n => eggplantPath + n + '.gif');
-        let msg = images.map(segment.image);
-        await this.e.reply(await common.makeForwardMsg(this.e, [msg], '超长的茄子来啦！'))
+        let msg = images.map(segment.image)
+        msg.unshift('超长的茄子来啦！\n')
+        await this.e.reply(await common.makeForwardMsg(this.e, [msg]))
         return true
     }
 }

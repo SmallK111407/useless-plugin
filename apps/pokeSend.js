@@ -27,6 +27,8 @@ export class pokeSend extends plugin {
       return false
     }
     if (e.target_id == e.self_id) {
+      if (e.adapter_name == "ICQQ")
+        this.reply({ type: "poke", id: Math.floor(Math.random()*7) })
       let path = `${_path}/goodjob-img/resources/`
       const dirs = fs.readdirSync(path)
       path = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}/`
