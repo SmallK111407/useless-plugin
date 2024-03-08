@@ -1,4 +1,7 @@
 export default class Button {
+  constructor(e = {}) {
+    this.msg = e.msg
+  }
 
   settingHelp() {
     return segment.button([
@@ -29,6 +32,12 @@ export default class Button {
     ], [
       { text: "茄子冷却", input: `#无用设置茄子冷却`, permission: 'admin' },
       { text: "戳戳开关", input: `#无用设置戳一戳`, permission: 'admin' },
+    ])
+  }
+
+  sendImage() {
+    return segment.button([
+      { text: "+1", input: this.msg, send: true },
     ])
   }
 }

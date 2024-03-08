@@ -1,5 +1,6 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import alias from '../model/alias.js'
+import Button from '../model/Button.js'
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
@@ -53,7 +54,7 @@ export class sendImage extends plugin {
         if (!role) return false
         const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
         let number = Math.floor(Math.random() * files.length)
-        await this.e.reply(segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`))
+        await this.e.reply([segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`), new Button(this.e).sendImage()])
         return true
     }
 }
