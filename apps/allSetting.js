@@ -1,6 +1,7 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import cfg from '../../../lib/config/config.js'
 import setting from '../model/setting.js'
+import Button from '../model/button.js'
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
@@ -73,7 +74,7 @@ export class allSetting extends plugin {
             this.result = result
         }
 
-        await this.e.reply(`${this.change}======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置全部人物冷却<数字>】\n【#无用设置茄子冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, true)
+        await this.e.reply([`${this.change}======无用配置菜单======\n【#无用检测配置文件】\n【#无用设置别名权限(0|1|2)】\n【#无用设置抽取冷却<数字>】\n【#无用设置全部人物冷却<数字>】\n【#无用设置茄子冷却<数字>】\n【#无用设置戳一戳(开启|关闭)】\n======================\n一言: ${this.result}`, new Button(this.e).settingHelp()])
         return true
     }
     async checkSetting() {
@@ -104,7 +105,7 @@ export class allSetting extends plugin {
         const eggplantcdtime = this.appconfig['eggplantCD']
         const poke = this.appconfig['poke']
         let pokeResult = String(poke).replace(/true/g, '开启').replace(/false/g, '关闭').trim()
-        await this.e.reply(`${this.change}======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n全部人物冷却: ${allCDtime}分钟\n全部茄子冷却: ${eggplantcdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, true)
+        await this.e.reply([`${this.change}======无用配置情况======\n别名权限: ${abbrSetAuthResult}\n抽取冷却: ${cdtime}分钟\n全部人物冷却: ${allCDtime}分钟\n全部茄子冷却: ${eggplantcdtime}分钟\n戳一戳: ${pokeResult}\n======================\n发送【#无用配置菜单】可以查看配置帮助吖~qwq`, new Button(this.e).getSetting()])
         return true
     }
     async abbrSetAuthSetting() {

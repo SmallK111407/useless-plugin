@@ -1,9 +1,11 @@
 import fs from 'node:fs'
 import chalk from 'chalk'
 
-if (!global.segment) {
-  global.segment = (await import("oicq")).segment
-}
+if (!global.segment)
+  global.segment = (await import('oicq')).segment
+
+if (!segment.button)
+  segment.button = () => ""
 
 let ret = []
 
