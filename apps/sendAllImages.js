@@ -26,9 +26,6 @@ export class sendAllImages extends plugin {
     get appconfig() { return setting.getConfig("config") }
 
     async sendAllImages() {
-        if (this.e.msg.includes(`更新`)) {
-            return false
-        }
         if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
         let cdtime = this.appconfig['allCD']
         if (CD[this.e.user_id] && !this.e.isMaster && !this.e.user_id == 1509293009) {
