@@ -21,12 +21,12 @@ export class pokeSend extends plugin {
   get appconfig() { return setting.getConfig("config") }
 
   async pokeSend(e) {
-    if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
     let result = this.appconfig['poke']
     if (result === false) {
       return false
     }
     if (e.target_id == e.self_id) {
+      if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
       if (e.adapter_name == "ICQQ")
         this.reply({ type: "poke", id: Math.floor(Math.random()*7) })
       let path = `${_path}/goodjob-img/resources/`
