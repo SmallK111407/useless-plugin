@@ -1,7 +1,6 @@
 import { Segment } from 'yunzai/core'
 import { Plugin as plugin } from 'yunzai/core'
 import alias from '../model/alias.js'
-import Button from '../model/Button.js'
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
@@ -50,7 +49,7 @@ export default class sendImage extends plugin {
         if (!role) return false
         const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
         let number = Math.floor(Math.random() * files.length)
-        await this.e.reply([Segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`), new Button(this.e).sendImage()])
+        await this.e.reply(Segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`))
         return true
     }
 }
