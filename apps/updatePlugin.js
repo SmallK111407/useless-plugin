@@ -17,7 +17,7 @@ export default class updatePlugin extends plugin {
 
     async update(e = this.e) {
         if (!e.isMaster) return false
-        const updatePath = path.resolve(_path, 'system/apps/update.ts')
+        const updatePath = path.resolve(_path, 'plugins/system/apps/update.ts')
         if (fs.existsSync(updatePath)) {
             const { update: Update } = await import(updatePath)
             e.isMaster = true
