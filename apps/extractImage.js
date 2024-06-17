@@ -1,24 +1,20 @@
-import plugin from '../../../lib/plugins/plugin.js'
+import { Segment } from 'yunzai/core'
+import { Plugin as plugin } from 'yunzai/core'
 import setting from '../model/setting.js'
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
 const CD = {}
-export class extractImage extends plugin {
+export default class extractImage extends plugin {
     constructor() {
-        super({
-            name: '[无用插件]随机抽取图片',
-            dsc: '随机抽取图片',
-            event: 'message',
-            priority: 10,
-            rule: [
-                {
-                    reg: '^#*(无用)?(随机)?抽取(图片|照片|卡片)$',
-                    fnc: 'extractImage'
-                }
-            ]
-        })
+        super()
+        this.rule = [
+            {
+                reg: /^#*(无用)?(随机)?抽取(图片|照片|卡片)$/,
+                fnc: this.extractImage.name
+            }
+        ]
     }
     get appconfig() { return setting.getConfig("config") }
 
@@ -44,6 +40,6 @@ export class extractImage extends plugin {
         let number = Number(i) + 1
         const file = fs.readdirSync(`${_path}/goodjob-img/resources/${character}/`)
         await this.reply(`您本次抽取到的人物为「${character}」\n本图片位于其文件夹第${number}张`, true)
-        await this.reply(segment.image(`${_path}/goodjob-img/resources/${character}/${file[i]}`))
+        await this.reply(Segment.image(`${_path}/goodjob-img/resources/${character}/${file[i]}`))
     }
 }

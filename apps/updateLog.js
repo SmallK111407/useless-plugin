@@ -1,21 +1,16 @@
-import plugin from '../../../lib/plugins/plugin.js'
-import common from "../../../lib/common/common.js"
+import { Plugin as plugin } from 'yunzai/core'
+import * as common from 'yunzai/core'
 import { execSync } from "child_process"
 
-export class updateLog extends plugin {
+export default class updateLog extends plugin {
   constructor() {
-    super({
-      name: '[无用插件]更新日志',
-      dsc: '无用插件更新日志',
-      event: 'message',
-      priority: 10,
-      rule: [
-        {
-          reg: '^#?无用(插件)?更新日志$',
-          fnc: 'updateLog'
-        }
-      ]
-    })
+    super()
+    this.rule = [
+      {
+        reg: /^#?无用(插件)?更新日志$/,
+        fnc: this.updateLog.name
+      }
+    ]
   }
   async getLog(plugin = 'useless-plugin') {
     let cm = 'git log  -20 --oneline --pretty=format:"%h||[%cd]  %s" --date=format:"%F %T"'
@@ -27,7 +22,7 @@ export class updateLog extends plugin {
       logAll = await execSync(cm, { encoding: 'utf-8', windowsHide: true })
     } catch (error) {
       logger.error(error.toString())
-      this.reply(error.toString())
+      this.e.reply(error.toString())
     }
     if (!logAll) return false
     logAll = logAll.split('\n')
@@ -47,6 +42,6 @@ export class updateLog extends plugin {
   }
   async updateLog() {
     let log = await this.getLog()
-    await this.reply(log)
+    await this.e.reply(log)
   }
 }

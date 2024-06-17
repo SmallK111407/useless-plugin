@@ -1,5 +1,5 @@
-import plugin from '../../../lib/plugins/plugin.js'
-import cfg from '../../../lib/config/config.js'
+import { Plugin as plugin } from 'yunzai/core'
+import { ConfigController as cfg } from 'yunzai/config'
 import setting from '../model/setting.js'
 import Button from '../model/Button.js'
 import fs from 'node:fs'
@@ -7,48 +7,43 @@ import fs from 'node:fs'
 const _path = process.cwd() + '/plugins/useless-plugin'
 const yunzaiName = cfg.package.name
 
-export class allSetting extends plugin {
+export default class allSetting extends plugin {
     constructor() {
-        super({
-            name: '[无用插件]设置',
-            dsc: '无用插件设置',
-            event: 'message',
-            priority: 10,
-            rule: [
-                {
-                    reg: '^#*无用(配置|设置)(菜单|说明|帮助)$',
-                    fnc: 'settingHelp'
-                },
-                {
-                    reg: '^#*无用(检测|检查)(配置|设置)?文件$',
-                    fnc: 'checkSetting'
-                },
-                {
-                    reg: '^#*无用(获取|查看)?(配置|设置)(情况|状况)?$',
-                    fnc: 'getSetting'
-                },
-                {
-                    reg: '^#*无用设置别名(权限|限制)(0|1|2)$',
-                    fnc: 'abbrSetAuthSetting'
-                },
-                {
-                    reg: '^#*无用设置抽取冷却(.*)(分|分钟)?$',
-                    fnc: 'extractSetting'
-                },
-                {
-                    reg: '^#*无用设置(全部|所有)人物冷却(.*)(分|分钟)?$',
-                    fnc: 'allCDSetting'
-                },
-                {
-                    reg: '^#*无用设置(全部|所有)?茄子冷却(.*)(分|分钟)?$',
-                    fnc: 'eggplantSetting'
-                },
-                {
-                    reg: '^#*无用设置戳一戳(开启|关闭)$',
-                    fnc: 'pokeSetting'
-                }
-            ]
-        })
+        super()
+        this.rule = [
+            {
+                reg: /^#*无用(配置|设置)(菜单|说明|帮助)$/,
+                fnc: this.settingHelp.name
+            },
+            {
+                reg: /^#*无用(检测|检查)(配置|设置)?文件$/,
+                fnc: this.checkSetting.name
+            },
+            {
+                reg: /^#*无用(获取|查看)?(配置|设置)(情况|状况)?$/,
+                fnc: this.getSetting.name
+            },
+            {
+                reg: /^#*无用设置别名(权限|限制)(0|1|2)$/,
+                fnc: this.abbrSetAuthSetting.name
+            },
+            {
+                reg: /^#*无用设置抽取冷却(.*)(分|分钟)?$/,
+                fnc: this.extractSetting.name
+            },
+            {
+                reg: /^#*无用设置(全部|所有)人物冷却(.*)(分|分钟)?$/,
+                fnc: this.allCDSetting.name
+            },
+            {
+                reg: /^#*无用设置(全部|所有)?茄子冷却(.*)(分|分钟)?$/,
+                fnc: this.eggplantSetting.name
+            },
+            {
+                reg: /^#*无用设置戳一戳(开启|关闭)$/,
+                fnc: this.pokeSetting.name
+            }
+        ]
     }
     async settingHelp() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
@@ -194,7 +189,7 @@ export class allSetting extends plugin {
                 return true
             }
         }
-    }async allCDSetting() {
+    } async allCDSetting() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }
         const configLines = fs.readFileSync(`${_path}/config/config.yaml`, 'utf8').split('\n').length;
         const defLines = fs.readFileSync(`${_path}/def/config.yaml`, 'utf8').split('\n').length;

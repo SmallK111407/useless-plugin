@@ -1,24 +1,19 @@
-import plugin from '../../../lib/plugins/plugin.js'
-import common from '../../../lib/common/common.js'
+import { Plugin as plugin } from 'yunzai/core'
+import * as common from 'yunzai/core'
 import fs from 'node:fs'
 import path from 'path'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
-export class numberRank extends plugin {
+export default class numberRank extends plugin {
     constructor() {
-        super({
-            name: '[无用插件]图片数量排行',
-            dsc: '查询全部人物图片数量排行榜',
-            event: 'message',
-            priority: 10,
-            rule: [
-                {
-                    reg: '^#*(无用)?(全部|所有)?(人物|角色)(数量|张数)?(排行|排名|榜单|排行榜)$',
-                    fnc: 'numberRank'
-                }
-            ]
-        })
+        super()
+        this.rule = [
+            {
+                reg: /^#*(无用)?(全部|所有)?(人物|角色)(数量|张数)?(排行|排名|榜单|排行榜)$/,
+                fnc: this.numberRank.name
+            }
+        ]
     }
 
     async numberRank() {

@@ -1,38 +1,34 @@
-import plugin from '../../../lib/plugins/plugin.js'
+import { Segment } from 'yunzai/core'
+import { Plugin as plugin } from 'yunzai/core'
 import alias from '../model/alias.js'
 import Button from '../model/Button.js'
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
-export class sendImage extends plugin {
+export default class sendImage extends plugin {
     constructor() {
-        super({
-            name: '[无用插件]发送图片',
-            dsc: '发送随机图片',
-            event: 'message',
-            priority: 10,
-            rule: [
-                {
-                    reg: '^#*(随机|来一张)杂图$',
-                    fnc: 'sendUnknown'
-                },
-                {
-                    reg: '^#*(随机|来一张)乐子(图片|照片)?',
-                    fnc: 'sendRandom'
-                },
-                {
-                    reg: '^#*(随机|来一张).*',
-                    fnc: 'sendImage'
-                }
-            ]
-        })
+        super()
+        this.rule = [
+            {
+                reg: /^#*(随机|来一张)杂图$/,
+                fnc: this.sendUnknown.name
+            },
+            {
+                reg: /^#*(随机|来一张)乐子(图片|照片)?/,
+                fnc: this.sendRandom.name
+            },
+            {
+                reg: /^#*(随机|来一张).*/,
+                fnc: this.sendImage.name
+            }
+        ]
     }
     async sendUnknown() {
         if (!fs.existsSync(`${_path}/goodjob-img`)) return this.e.reply(`未发现安装了图库\n请主人使用【#无用图库更新】来安装图库！`)
         const files = fs.readdirSync(`${_path}/goodjob-img/resources/UNKNOWN/`)
         let number = Math.floor(Math.random() * files.length)
-        await this.e.reply(segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
+        await this.e.reply(Segment.image(`${_path}/goodjob-img/resources/UNKNOWN/${files[number]}`))
         return true
     }
     async sendRandom() {
@@ -42,7 +38,7 @@ export class sendImage extends plugin {
         path = `${path}${dirs[Math.floor(Math.random() * dirs.length)]}/`
         const files = fs.readdirSync(path)
         path = `${path}${files[Math.floor(Math.random() * files.length)]}`
-        await this.e.reply(segment.image(path))
+        await this.e.reply(Segment.image(path))
         return true
     }
     async sendImage() {
@@ -54,7 +50,7 @@ export class sendImage extends plugin {
         if (!role) return false
         const files = fs.readdirSync(`${_path}/goodjob-img/resources/${role}/`)
         let number = Math.floor(Math.random() * files.length)
-        await this.e.reply([segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`), new Button(this.e).sendImage()])
+        await this.e.reply([Segment.image(`${_path}/goodjob-img/resources/${role}/${files[number]}`), new Button(this.e).sendImage()])
         return true
     }
 }

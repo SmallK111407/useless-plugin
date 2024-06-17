@@ -1,5 +1,6 @@
-import plugin from '../../../lib/plugins/plugin.js'
-import common from '../../../lib/common/common.js'
+import { Segment } from 'yunzai/core'
+import { Plugin as plugin } from 'yunzai/core'
+import * as common from 'yunzai/core'
 import alias from '../model/alias.js'
 import setting from '../model/setting.js'
 import fs from 'node:fs'
@@ -8,20 +9,15 @@ import path from 'path'
 const _path = process.cwd() + '/plugins/useless-plugin'
 
 const CD = {}
-export class sendAllImages extends plugin {
+export default class sendAllImages extends plugin {
     constructor() {
-        super({
-            name: '[无用插件]查看人物全部图片',
-            dsc: '查看单独一个人物的所有的图片',
-            event: 'message',
-            priority: 11,
-            rule: [
-                {
-                    reg: '^#*(无用)?(查看|发送)?(全部|所有).*',
-                    fnc: 'sendAllImages'
-                }
-            ]
-        })
+        super()
+        this.rule = [
+            {
+                reg: /^#*(无用)?(查看|发送)?(全部|所有).*/,
+                fnc: this.sendAllImages.name
+            }
+        ]
     }
     get appconfig() { return setting.getConfig("config") }
 
@@ -51,7 +47,7 @@ export class sendAllImages extends plugin {
                 let filePath = path.join(dirPath, file);
                 let isImage = ['.jpeg', '.jpg', '.gif', '.png'].some(i => filePath.endsWith(i));
                 if (isImage)
-                    msg.push(`${i + 1}`, segment.image(filePath));
+                    msg.push(`${i + 1}`, Segment.image(filePath));
             }
             let reply = await this.e.reply(await common.makeForwardMsg(this.e, [msg]))
             if (!reply) this.e.reply(`发送失败了，可能是图片过多...\n当前所查看人物图片数量共${files.length}张`, true)

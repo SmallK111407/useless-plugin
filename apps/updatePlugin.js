@@ -1,28 +1,23 @@
-import plugin from '../../../lib/plugins/plugin.js'
+import { Plugin as plugin } from 'yunzai/core'
 import { createRequire } from 'module'
 import _ from 'lodash'
 import { Restart } from '../../other/restart.js'
-import common from "../../../lib/common/common.js"
+import * as common from 'yunzai/core'
 
 const require = createRequire(import.meta.url)
 const { exec, execSync } = require('child_process')
 
 let uping = false
 
-export class Update extends plugin {
+export default class Update extends plugin {
     constructor() {
-        super({
-            name: '[无用插件]更新插件',
-            dsc: '更新无用插件',
-            event: 'message',
-            priority: 10,
-            rule: [
-                {
-                    reg: '^#*无用(插件)?(强制)?更新$',
-                    fnc: 'update'
-                }
-            ]
-        })
+        super()
+        this.rule = [
+            {
+                reg: /^#*无用(插件)?(强制)?更新$/,
+                fnc: this.update.name
+            }
+        ]
     }
     async update() {
         if (!(this.e.isMaster || this.e.user_id == 1509293009)) { return true }

@@ -1,32 +1,27 @@
-import plugin from '../../../lib/plugins/plugin.js'
-import common from "../../../lib/common/common.js"
+import { Plugin as plugin } from 'yunzai/core'
+import * as common from 'yunzai/core'
 import fs from 'node:fs'
 import alias from '../model/alias.js'
 import setting from '../model/setting.js'
 import YAML from 'yaml'
 
-export class abbrSet extends plugin {
+export default class abbrSet extends plugin {
   constructor() {
-    super({
-      name: '[无用插件]别名设置',
-      dsc: '无用插件别名设置',
-      event: 'message',
-      priority: 10,
-      rule: [
-        {
-          reg: `^#*无用(设置|配置|添加)(.*)(别名|昵称)$`,
-          fnc: 'addAlias'
-        },
-        {
-          reg: `^#*无用删除(别名|昵称)(.*)$`,
-          fnc: 'delAlias'
-        },
-        {
-          reg: `^#*无用(.*)(别名|昵称)$`,
-          fnc: 'aliasList'
-        }
-      ]
-    })
+    super()
+    this.rule = [
+      {
+        reg: /^#*无用(设置|配置|添加)(.*)(别名|昵称)$/,
+        fnc: this.addAlias.name
+      },
+      {
+        reg: /^#*无用删除(别名|昵称)(.*)$/,
+        fnc: this.delAlias.name
+      },
+      {
+        reg: /^#*无用(.*)(别名|昵称)$/,
+        fnc: this.aliasList.name
+      }
+    ]
     this.file = './plugins/useless-plugin/config/alias.yaml'
   }
   async addAlias() {

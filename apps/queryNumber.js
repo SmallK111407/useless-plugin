@@ -1,31 +1,26 @@
-import plugin from '../../../lib/plugins/plugin.js'
+import { Plugin as plugin } from 'yunzai/core'
 import alias from '../model/alias.js'
 import fs from 'node:fs'
 
 const _path = process.cwd() + '/plugins/useless-plugin'
 
-export class queryNumber extends plugin {
+export default class queryNumber extends plugin {
     constructor() {
-        super({
-            name: '[无用插件]查询图片数量',
-            dsc: '查询图片数量',
-            event: 'message',
-            priority: 10,
-            rule: [
-                {
-                    reg: '^#*(无用)?(查询|查看|检查)杂图(图片|图)?(数量|张数|数)',
-                    fnc: 'queryMessyNumber'
-                },
-                {
-                    reg: '^#*(无用)?(查询|查看|检查)(全部|所有|乐子)(图片|图)?(数量|张数|数)',
-                    fnc: 'queryAll'
-                },
-                {
-                    reg: '^#*(无用)?(查询|查看|检查).*(图片|图)?(数量|张数|数)',
-                    fnc: 'queryNumber'
-                }
-            ]
-        })
+        super()
+        this.rule = [
+            {
+                reg: /^#*(无用)?(查询|查看|检查)杂图(图片|图)?(数量|张数|数)/,
+                fnc: this.queryMessyNumber.name
+            },
+            {
+                reg: /^#*(无用)?(查询|查看|检查)(全部|所有|乐子)(图片|图)?(数量|张数|数)/,
+                fnc: this.queryAll.name
+            },
+            {
+                reg: /^#*(无用)?(查询|查看|检查).*(图片|图)?(数量|张数|数)/,
+                fnc: this.queryNumber.name
+            }
+        ]
     }
 
     async queryMessyNumber() {
