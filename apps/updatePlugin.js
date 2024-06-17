@@ -1,6 +1,7 @@
 import { Plugin as plugin } from 'yunzai/core'
 import fs from 'fs'
 import path from 'path'
+import { pathToFileURL } from 'url'
 
 const _path = process.cwd()
 
@@ -17,9 +18,10 @@ export default class updatePlugin extends plugin {
 
     async update(e = this.e) {
         if (!e.isMaster) return false
-        const updatePath = path.resolve(_path, 'plugins/system/apps/update.ts')
+        const updatePath = path.join(_path, 'plugins/system/apps/update.ts')
         if (fs.existsSync(updatePath)) {
-            const { update: Update } = await import(updatePath)
+            const updateUrl = pathToFileURL(updatePath).href
+            const { update: Update } = await import(updateUrl)
             e.isMaster = true
             e.msg = `#${e.msg.includes('强制') ? '强制' : '更新'}useless-plugin`
             const up = new Update(e)
