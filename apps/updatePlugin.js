@@ -2,6 +2,8 @@ import { Plugin as plugin } from 'yunzai/core'
 import fs from 'fs'
 import path from 'path'
 
+const _path = process.cwd()
+
 export default class updatePlugin extends plugin {
     constructor() {
         super()
@@ -15,7 +17,7 @@ export default class updatePlugin extends plugin {
 
     async update(e = this.e) {
         if (!e.isMaster) return false
-        const updatePath = path.resolve(__dirname, 'system/apps/update.ts')
+        const updatePath = path.resolve(_path, 'system/apps/update.ts')
         if (fs.existsSync(updatePath)) {
             const { update: Update } = await import(updatePath)
             e.isMaster = true
