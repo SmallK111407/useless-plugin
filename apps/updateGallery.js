@@ -30,7 +30,7 @@ export default class updateGallery extends plugin {
       let pluginResourcePath = this.getPluginResourcePath(listElement)
       setTimeout(async function () {
         if (fs.existsSync(pluginResourcePath)) {
-          exec(pull, { cwd: pluginResourcePath }, function (error, stdout, stderr) {
+          exec(pull, { cwd: pluginResourcePath }, (error, stdout, stderr) => {
             let numRet = /(\d*) files changed,/.exec(stdout)
             if (numRet && numRet[1]) { logger.info(`${listElement}无用图包自动更新成功，此次更新了${numRet[1]}个图片~`) } else if (error) { logger.info('图片资源更新失败！\nError code: ' + error.code + '\n' + error.stack + '\n 将于明日重试') }
           })
@@ -49,7 +49,7 @@ export default class updateGallery extends plugin {
     }
     if (fs.existsSync(this.getPluginResourcePath(libName))) {
       let command = await this.getUpdateType()
-      exec(command, { cwd: this.getPluginResourcePath(libName) }, function (error, stdout, stderr) {
+      exec(command, { cwd: this.getPluginResourcePath(libName) }, (error, stdout, stderr) => {
         if (/Already up to date/.test(stdout) || stdout.includes('最新')) { this.e.reply('目前所有图片都已经是最新了~') }
         let numRet = /(\d*) files changed,/.exec(stdout)
         if (numRet && numRet[1]) { this.e.reply(`报告主人，更新成功，此次更新了${libName}的${numRet[1]}个图片~`) }
@@ -58,7 +58,7 @@ export default class updateGallery extends plugin {
     } else {
       let command = `git clone --depth=1 ${link[libName]} "${this.getPluginResourcePath(libName)}"`
       this.e.reply(`开始尝试安装${libName}，可能会需要一段时间，请耐心等待~`)
-      exec(command, function (error, stdout, stderr) { if (error) { this.e.reply(`${libName}安装失败！\nError code: ` + error.code + '\n' + error.stack + '\n 请稍后重试。') } else { this.e.reply(`${libName}安装成功！您后续也可以通过 #${libName}更新 命令来更新图像`) } })
+      exec(command, (error, stdout, stderr) => { if (error) { this.e.reply(`${libName}安装失败！\nError code: ` + error.code + '\n' + error.stack + '\n 请稍后重试。') } else { this.e.reply(`${libName}安装成功！您后续也可以通过 #${libName}更新 命令来更新图像`) } })
     }
     return true
   }

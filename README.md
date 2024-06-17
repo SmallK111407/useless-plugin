@@ -26,11 +26,11 @@ _♥这只是一个 “玩笑” ♥_
 
 **Github**
 ```
-git clone --depth=1 https://github.com/SmallK111407/useless-plugin.git ./plugins/useless-plugin/
+git clone -b v4 --depth=1 https://github.com/SmallK111407/useless-plugin.git ./plugins/useless-plugin/
 ```
 **Gitee**
 ```
-git clone --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/useless-plugin/
+git clone -b v4 --depth=1 https://gitee.com/SmallK111407/useless-plugin.git ./plugins/useless-plugin/
 ```
 
 ## 图库贡献方式
