@@ -21,8 +21,7 @@ export class pokeSend extends plugin {
   get appconfig() { return setting.getConfig("config") }
 
   async pokeSend(e) {
-    let result = this.appconfig['poke']
-    if (result === false) {
+    if (!this.appconfig['poke']) {
       return false
     }
     if (e.target_id == e.self_id) {
