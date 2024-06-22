@@ -14,7 +14,7 @@ export default class abbrSet extends plugin {
         fnc: this.addAlias.name
       },
       {
-        reg: /^#*无用删除(别名|昵称)(.*)$/,
+        reg: /^#*无用删除(别名|昵称)/,
         fnc: this.delAlias.name
       },
       {
