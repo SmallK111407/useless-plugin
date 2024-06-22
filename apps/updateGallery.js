@@ -8,6 +8,7 @@ import { library, link, list } from '../model/moreLib.js'
 export default class updateGallery extends plugin {
   constructor() {
     super()
+    this.name = '[无用插件]图库更新'
     this.rule = [
       {
         reg: /^#*(github)?无用(图包|图库|图片)(强行)?(强制)?(升级|更新)$/,

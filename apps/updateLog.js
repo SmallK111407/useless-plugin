@@ -5,6 +5,7 @@ import { execSync } from "child_process"
 export default class updateLog extends plugin {
   constructor() {
     super()
+    this.name = '[无用插件]更新日志'
     this.rule = [
       {
         reg: /^#?无用(插件)?更新日志$/,

@@ -12,6 +12,7 @@ const CD = {}
 export default class sendAllImages extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]发送全部图片'
         this.rule = [
             {
                 reg: /^#*(无用)?(查看|发送)?(全部|所有).*/,

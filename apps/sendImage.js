@@ -8,6 +8,7 @@ const _path = process.cwd() + '/plugins/useless-plugin'
 export default class sendImage extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]随机图片'
         this.rule = [
             {
                 reg: /^#*(随机|来一张)杂图$/,

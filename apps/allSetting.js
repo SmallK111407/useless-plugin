@@ -9,6 +9,7 @@ const yunzaiName = cfg.package.name
 export default class allSetting extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]设置'
         this.rule = [
             {
                 reg: /^#*无用(配置|设置)(菜单|说明|帮助)$/,

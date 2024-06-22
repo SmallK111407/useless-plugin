@@ -8,6 +8,8 @@ const _path = process.cwd() + '/plugins/useless-plugin'
 export default class pokeSend extends plugin {
   constructor() {
     super()
+    this.name = '[无用插件]设置'
+    this.event = 'notice.group.poke'
     this.rule = [
       {
         fnc: this.pokeSend.name

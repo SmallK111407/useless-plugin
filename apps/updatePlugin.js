@@ -8,6 +8,7 @@ const _path = process.cwd()
 export default class updatePlugin extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]插件更新'
         this.rule = [
             {
                 reg: /^#*无用(插件)?(强制)?更新$/,

@@ -8,6 +8,7 @@ const _path = process.cwd() + '/plugins/useless-plugin'
 export default class numberRank extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]人物排行榜'
         this.rule = [
             {
                 reg: /^#*(无用)?(全部|所有)?(人物|角色)(数量|张数)?(排行|排名|榜单|排行榜)$/,

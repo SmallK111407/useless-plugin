@@ -8,6 +8,7 @@ const _path = process.cwd() + '/plugins/useless-plugin'
 export default class checkImage extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]发送图片'
         this.rule = [
             {
                 reg: /^#*(无用)?(查看|发送)杂图(第)?.*(张|号)?(图片|照片|图)?/,

@@ -9,6 +9,7 @@ const CD = {}
 export default class extractImage extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]抽图片'
         this.rule = [
             {
                 reg: /^#*(无用)?(随机)?抽取(图片|照片|卡片)$/,

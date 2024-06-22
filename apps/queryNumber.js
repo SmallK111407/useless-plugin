@@ -7,6 +7,7 @@ const _path = process.cwd() + '/plugins/useless-plugin'
 export default class queryNumber extends plugin {
     constructor() {
         super()
+        this.name = '[无用插件]查询图片数量'
         this.rule = [
             {
                 reg: /^#*(无用)?(查询|查看|检查)杂图(图片|图)?(数量|张数|数)/,

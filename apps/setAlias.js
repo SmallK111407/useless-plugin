@@ -8,6 +8,7 @@ import YAML from 'yaml'
 export default class abbrSet extends plugin {
   constructor() {
     super()
+    this.name = '[无用插件]设置别名'
     this.rule = [
       {
         reg: /^#*无用(设置|配置|添加)(.*)(别名|昵称)$/,
